@@ -4,7 +4,7 @@
 */
 
 //Random uniform
-_uniforms = [
+_vanillaUniforms = [
 	"U_C_Poloshirt_blue",
 	"U_C_Poloshirt_burgundy",
 	"U_C_Poloshirt_redwhite",
@@ -13,7 +13,8 @@ _uniforms = [
 	"U_C_Poloshirt_tricolour"
 ];
 
-_randomUniform = _uniforms call BIS_fnc_selectRandom;
+
+_randomUniform = _vanillaUniforms call BIS_fnc_selectRandom;
 
 
 //Add equipment

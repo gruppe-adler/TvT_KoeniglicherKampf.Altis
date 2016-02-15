@@ -51,6 +51,11 @@ if (hasInterface) then {
 
 //SERVER ONLY
 if (isServer) then {
+
+	//TFAR
+	if (isClass (configFile >> "CfgPatches" >> "task_force_radio")) then {
+		[] execVM "tfarsettings.sqf";
+	};
 	
 	//Setup
 	_areahndl = [] execVM "setup\playArea.sqf";
@@ -70,5 +75,3 @@ if (isServer) then {
 	[] execVM "server\blueCircles.sqf";
 
 };
-
-//test
