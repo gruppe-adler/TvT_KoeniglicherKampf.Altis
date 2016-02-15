@@ -1,0 +1,77 @@
+//======================================================================= HEADER
+class Header
+{
+  gameType = TDM;
+  minPlayers = 1;
+  maxPlayers = 26;
+};
+
+
+//======================================================================= LOAD SCREEN
+onLoadName = "Königlicher Kampf";
+onLoadMission = "Pls don't sue me.";
+author = "McDiod für Gruppe Adler";
+loadScreen = "pictures\logo.paa";
+
+
+//======================================================================= MISC
+enableDebugConsole = 2;
+
+
+//======================================================================= PARAMETERS
+class Params
+{
+	class debugmode
+	{
+		title = "Debug Mode";
+		values[] = {true, false};
+		texts[] = {"On", "Off"};
+		default = true;
+	};
+
+	class randomteams
+	{
+		title = "Random Teams";
+		values[] = {true, false};
+		texts[] = {"On", "Off"};
+		default = true;
+	};
+
+	class teamsize
+	{
+		title = "Random Teams - Size";
+		values[] = {1,2,3,4,5};
+		texts[] = {"1","2","3","4","5"};
+		default = 2;
+	};
+
+	class gametime
+	{
+		title = "Max. Game Length";
+		values[] = {4800, 4200, 3600, 3000, 2400, 1800};
+		texts[] = {"80 min", "70 min", "60 min", "50 min", "40 min", "30 min"};
+		default = 1800;
+	};
+		
+};
+
+
+//======================================================================= 
+class CfgRemoteExec
+{        
+       // List of script functions allowed to be sent from client via remoteExec
+       class Functions
+       {
+               // State of remoteExec: 0-turned off, 1-turned on, taking whitelist into account, 2-turned on, however, ignoring whitelists (default because of backward compatibility)
+               mode = 2;
+               // Ability to send jip messages: 0-disabled, 1-enabled (default)
+               jip = 1;
+
+       };        
+       // List of script commands allowed to be sent from client via remoteExec
+       class Commands
+       {
+              /*your commands here*/
+              class execVM { allowedTargets=0;} // can target anyone, sending jip is turned off (overrides settings in the Commands class)
+	};
+};
