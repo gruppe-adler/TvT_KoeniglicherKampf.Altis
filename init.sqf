@@ -63,7 +63,7 @@ if (isServer) then {
 	waitUntil {scriptDone _vehhndl};
 	waitUntil {scriptDone _loothndl};
 
-	_startrndhdnl = [] execVM "setup\startRound.sqf";
+	_startrndhndl = [] execVM "setup\startRound.sqf";
 	waitUntil {scriptDone _startrndhndl};
 
 	//Game
