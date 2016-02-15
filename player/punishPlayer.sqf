@@ -18,6 +18,7 @@ diag_log "punishPlayer starting...";
 //Set initial circle center
 OLDCENTER = NEWCIRCLEPOS;
 OLDSIZE = NEWCIRCLESIZE;
+BODYPARTS = ["body", "hand_l", "hand_r", "leg_l", "leg_r"];
 _messageSent = false;
 _tick = 4;
 
@@ -76,7 +77,8 @@ while {true} do {
 		else
 		{
 			_messageSent = false;
-			player setDamage ((damage player) + 0.2);
+			_bodyPart = BODYPARTS call BIS_fnc_selectRandom;
+			[player, 0.3, _bodyPart, "bullet"] call ace_medical_fnc_addDamageToUnit;
 		};
 	}
 	else

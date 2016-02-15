@@ -73,5 +73,6 @@ if (isServer) then {
 
 	//Game
 	[] execVM "server\blueCircles.sqf";
+	[] execVM "server\killMessages.sqf";
 
 };
