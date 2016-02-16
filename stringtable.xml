@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project name="TvT_KoeniglicherKampf_project">
+	<Package name="TvT_KoeniglicherKampf_package">
+
+		<Container name="mission briefing">
+			<Key ID="str_GRAD_story">
+				<Original>asd</Original>
+				<English>asd</English>
+				<German>asd</German>
+			</Key>
+
+			<Key ID="str_GRAD_brief2title">
+				<Original>Gameplay</Original>
+				<English>Gameplay</English>
+				<German>Spielablauf</German>
+			</Key>
+
+			<Key ID="str_GRAD_gameplay">
+				<Original>asd</Original>
+				<English>asd</English>
+				<German>asd</German>
+			</Key>
+		</Container>
+
+		<Container name="mission setup">
+		</Container>
+
+	</Package>
+</Project>

@@ -6,8 +6,12 @@
 private ["_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext"];
 _initialRadius = (ISLAND_CONFIG select (ISLANDS find worldName)) select 3;
 _circleSizes = (ISLAND_CONFIG select (ISLANDS find worldName)) select 4;
-NEWCIRCLEPOS = (ISLAND_CONFIG select (ISLANDS find worldName)) select 1;
 _circleID = 0;
+
+//Define 0th circle as playarea, so that carepackages may spawn before the first circle
+NEWCIRCLEPOS = PLAYAREACENTER;
+NEWCIRCLESIZE = ISLAND_PLAYAREASIZE;
+
 
 //How often are new circles spawned?
 _circleInterval = (GAME_TIME - TIME_UNTIL_FIRST_CIRCLE - TIME_UNTIL_GETIN_FIRST) / (count _circleSizes);

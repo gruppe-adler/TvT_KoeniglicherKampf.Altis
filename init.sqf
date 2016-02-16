@@ -5,14 +5,19 @@ call compile preprocessFile "islandConfig.sqf";
 CIRCLESSTARTED = false;
 
 //Settings
-JUMP_HEIGHT = 1000;
 TIME_UNTIL_ROUND_START = 30;
 TIME_UNTIL_FIRST_CIRCLE = 300;
 TIME_UNTIL_GETIN_FIRST = 300;
 TIME_UNTIL_GETIN = 120;
+TIME_UNTIL_FIRST_CAREPACKAGE = 180;
+
+JUMP_HEIGHT = 1000;
 MINMAX_CARS = [10,25];
 LOOT_PROBABILITY = 75;
 LOOTSPAWN_TICKRATE = 0.2;
+CAREPACKAGE_INTERVAL [120,300];
+CAREPACKAGE_DROPHEIGHT = 500;
+CAREPACKAGE_LOOTAMOUNT = 6;
 
 //Read Islandconfig
 ISLAND_CENTER = (ISLAND_CONFIG select (ISLANDS find worldName)) select 1;
@@ -41,6 +46,7 @@ if (hasInterface) then {
 	[] execVM "player\startPosition.sqf";
 	[] execVM "player\startEquipment.sqf";
 	[] execVM "player\punishPlayer.sqf";
+	[] execVM "player\briefing.sqf";
 
 	//Intro
 	if (!didJIP) then {
@@ -74,5 +80,6 @@ if (isServer) then {
 	//Game
 	[] execVM "server\blueCircles.sqf";
 	[] execVM "server\killMessages.sqf";
+	[] execVM "server\carePackages.sqf";
 
 };

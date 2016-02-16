@@ -6,7 +6,11 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit"];
 	PARACHUTEPOSITIONS = [];
 
 	//find position
-	_teamleadpos = [PLAYAREACENTER, [0, ISLAND_SPAWNSEARCHRADIUS], [0,360]] call SHK_pos;
+	_isWater = true;
+	while {_isWater} do {
+		_teamleadpos = [PLAYAREACENTER, [0, ISLAND_SPAWNSEARCHRADIUS], [0,360], 1] call SHK_pos;
+		_isWater = surfaceIsWater _teamleadpos;
+	};
 	_teamleadpos = _teamleadpos vectorAdd [0,0,JUMP_HEIGHT];
 
 	//in debug mode, add marker
