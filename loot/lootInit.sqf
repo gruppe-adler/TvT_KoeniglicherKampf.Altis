@@ -6,8 +6,8 @@
 private ["_houseList", "_bPosCounter", "_type","_cleanUpCounter", "_lootSpawnCounter", "_lootSpawnTotalCounter", "_startTime", "_lootSpawned"];
 
 //Load config and loot spawn function
-mcd_fnc_spawnLoot = compile preprocessFile "loot\spawnLoot.sqf";
-call compile preprocessFile "loot\lootConfig.sqf";
+mcd_fnc_spawnLoot = compile preprocessFileLineNumbers "loot\spawnLoot.sqf";
+call compile preprocessFileLineNumbers "loot\lootConfig.sqf";
 sleep 2;
 
 //Read settings

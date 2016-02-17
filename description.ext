@@ -51,7 +51,31 @@ class Params
 		title = "Max. Game Length";
 		values[] = {4800, 4200, 3600, 3000, 2400, 1800};
 		texts[] = {"80 min", "70 min", "60 min", "50 min", "40 min", "30 min"};
-		default = 1800;
+		default = 2400;
+	};
+
+	class scopes
+	{
+		title = "High Powered Scopes";
+		values[] = {true, false};
+		texts[] = {"Normal", "Rare"};
+		default = false;
+	};
+
+	class WeatherSetting
+    {
+		title = "Weather";
+		values[] = {0,1,2,3};
+		texts[] = {"Sunny Day","Rainy Day","Cloudy Day","Random"};
+		default = 3;
+    };
+
+	class TimeOfDay
+	{
+		title = "Time of Day";
+		values[] = {6.5,7,8,9,10,11,12,13,14,15,16,17,1000};
+		texts[] = {"06:30", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "Random"};
+		default = 1000;
 	};
 		
 };

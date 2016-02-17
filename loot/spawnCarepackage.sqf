@@ -4,7 +4,7 @@
 */
 
 params ["_carepackagePos"];
-private ["_inTheAir", "_box","_chute","_smoke", "_lootPos", "_fallSpeed"];
+private ["_inTheAir", "_box","_chute","_smoke", "_lootPos", "_fallSpeed", "_weaponType"];
 
 diag_log format ["Spawning carepackage at %1", _carepackagePos];
 
@@ -76,29 +76,45 @@ for "_i" from 0 to CAREPACKAGE_LOOTAMOUNT do {
 	_holder = createVehicle ["groundweaponholder", _lootPos, [], 0, "can_Collide"];
 
 	//Add contents to weaponholder
-	_type = floor (random 4.99);
+	_type = floor (random 3.99);
 
 	//Weapon
 	if (_type == 0) then {
-		_weapon = CPWEAPONS call bis_fnc_selectRandom; 
+		_weaponType = floor random 1.99;
 
-		_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
-		_magazineClass = _magazines call bis_fnc_selectRandom; 
+		//Any other weapon
+		if (_weaponType == 0) then {			
+			_weapon = CPWEAPONS call bis_fnc_selectRandom; 
+			_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
+			_magazineClass = _magazines call bis_fnc_selectRandom; 
 
-		_holder addWeaponCargoGlobal [_weapon, 1];
-		_holder addMagazineCargoGlobal [_magazineClass, (floor random 4) max 1];
+			_holder addWeaponCargoGlobal [_weapon, 1];
+			_holder addMagazineCargoGlobal [_magazineClass, (floor random 4) max 1];
+
+		//Sniper
+		} else {		
+			_weapon = CPSNIPERS call bis_fnc_selectRandom; 
+			_scope = CPSCOPES call bis_fnc_selectRandom;
+			_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
+			_magazineClass = _magazines call bis_fnc_selectRandom; 
+
+			_holder addWeaponCargoGlobal [_weapon, 1];
+			_holder addItemCargoGlobal [_scope, 1];
+			_holder addMagazineCargoGlobal [_magazineClass, (floor random 4) max 1];
+		};
 	};
 
 	//Ammo type items
 	if (_type == 1) then {
 		_ammo = CPAMMO call bis_fnc_selectRandom; 
 		_holder addMagazineCargoGlobal [_ammo, (floor random 3) max 1];
+		_holder addItemCargoGlobal ["ACE_Clacker", 1];
 	};	
 
 	//Items
 	if (_type == 2) then {
-		_item = CPITEMS call bis_fnc_selectRandom;
-		_holder addItemCargoGlobal [_item, (floor random 3) max 1];
+		_item = CPMEDICAL call bis_fnc_selectRandom;
+		_holder addItemCargoGlobal [_item, (floor random 5) max 1];
 	};	
 
 	//Vest and Uniforms 
@@ -106,13 +122,6 @@ for "_i" from 0 to CAREPACKAGE_LOOTAMOUNT do {
 		_item = CPVESTSANDUNIFORMS call bis_fnc_selectRandom;
 		_holder addItemCargoGlobal [_item, 1];
 	};
-
-	//Backpacks
-	if (_type == 4) then {
-		_backpack = CPBACKPACKS call bis_fnc_selectRandom;
-		_holder addBackpackCargoGlobal [_backpack, 1];
-	};
-
 };
 
 

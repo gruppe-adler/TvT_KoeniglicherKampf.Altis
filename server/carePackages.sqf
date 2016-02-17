@@ -51,7 +51,8 @@ while {true} do {
 	//Find position to drop package, repeat until not over water
 	_isWater = true;
 	while {_isWater} do {
-		_carepackagePos = [NEWCIRCLEPOS, NEWCIRCLESIZE, [0,360], 1];
+
+		_carepackagePos = [NEWCIRCLEPOS, NEWCIRCLESIZE, [0,360], 1] call SHK_pos;
 		_isWater = surfaceIsWater _carepackagePos;
 	};
 	//Add dropheight

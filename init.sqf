@@ -2,6 +2,7 @@ call compile preprocessfile "SHK_pos\shk_pos_init.sqf";
 call compile preprocessFile "islandConfig.sqf";
 
 //Misc
+disableRemoteSensors true;
 CIRCLESSTARTED = false;
 
 //Settings
@@ -13,7 +14,7 @@ TIME_UNTIL_FIRST_CAREPACKAGE = 180;
 
 JUMP_HEIGHT = 1000;
 MINMAX_CARS = [10,25];
-LOOT_PROBABILITY = 75;
+LOOT_PROBABILITY = 65;
 LOOTSPAWN_TICKRATE = 0.2;
 CAREPACKAGE_INTERVAL = [120,300];
 CAREPACKAGE_DROPHEIGHT = 500;
@@ -31,9 +32,37 @@ DEBUG_MODE = (paramsArray select 0) == 1;
 RANDOM_TEAMS = (paramsArray select 1) == 1;
 TEAM_SIZE = paramsArray select 2;
 GAME_TIME = paramsArray select 3;
+SCOPES_ALLOWED = (paramsArray select 4) == 1;
+WEATHER_SETTING = paramsArray select 5;
+TIME_OF_DAY = paramsArray select 6;
+
+//Weather
+setCustomWeather = {
+	// skipTime -24; 
+	0 setOvercast (_this select 0); 
+	setViewDistance 6000;
+	// skipTime 24;
+};
+
+switch (WEATHER_SETTING) do {
+	case 0: {[0] call setCustomWeather;};
+	case 1: {[0.4] call setCustomWeather;};
+	case 2: {[1] call setCustomWeather;};
+	case 3: {[random 1] call setCustomWeather;};
+	default {[0] call setCustomWeather;};
+};
+
 
 //SERVER ONLY
 if (isServer) then {
+
+	// set to full moon date
+	if (TIME_OF_DAY == 1000) then {
+		TIME_OF_DAY = (random 10.5) + 6.5;
+		diag_log "Random time of day.";
+	};
+	diag_log format ["Setting time of day to %1.", TIME_OF_DAY];
+	setDate [2015, 2, 2, TIME_OF_DAY, 1];
 
 	GAMESTARTED = false;
 	publicVariable "GAMESTARTED";
