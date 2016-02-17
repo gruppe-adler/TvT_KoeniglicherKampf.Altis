@@ -6,7 +6,17 @@ missionname="TvT_KoeniglicherKampf"
 
 islands=(
 	Altis
+	Chernarus
+	Esseker
+	fata
+	Kunduz
+	namalsk
+	Porto
+	Sara_dbe1
 	Stratis
+	Takistan
+	utes
+	Zargabad
 )
 
 ### AS AS USER, DONT EDIT BELOW THIS LINE ###

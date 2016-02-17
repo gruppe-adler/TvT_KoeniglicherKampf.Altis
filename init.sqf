@@ -25,7 +25,6 @@ ISLAND_CENTER = (ISLAND_CONFIG select (ISLANDS find worldName)) select 1;
 ISLAND_SPAWNSEARCHRADIUS = (ISLAND_CONFIG select (ISLANDS find worldName)) select 2;
 ISLAND_USEWHOLE = (ISLAND_CONFIG select (ISLANDS find worldName)) select 5;
 ISLAND_PLAYAREASEARCHRADIUS = (ISLAND_CONFIG select (ISLANDS find worldName)) select 6;
-ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 500;
 
 //Parameters
 DEBUG_MODE = (paramsArray select 0) == 1;

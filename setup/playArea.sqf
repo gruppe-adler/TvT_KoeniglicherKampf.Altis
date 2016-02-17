@@ -34,10 +34,12 @@ Optional Parameters:
 //whole island?
 if (ISLAND_USEWHOLE) then {
 	PLAYAREACENTER = ISLAND_CENTER;
+  ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 2000;
 	diag_log "Using whole island as play area.";
 }
 else {
 
+  ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 500;
 
   //if you use "find closest land" instead of this, center will be more likely to be near coast
 	_isWater = true;

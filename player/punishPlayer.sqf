@@ -16,9 +16,12 @@ diag_log "punishPlayer starting...";
 
 waitUntil {!isNil "NEWCIRCLEPOS"};
 
-//Set initial circle center
-OLDCENTER = NEWCIRCLEPOS;
-OLDSIZE = NEWCIRCLESIZE;
+//Set initial circle center unless entire island is used
+if (!ISLAND_USEWHOLE) then {
+	OLDCENTER = NEWCIRCLEPOS;
+	OLDSIZE = NEWCIRCLESIZE;
+};
+
 BODYPARTS = ["body", "hand_l", "hand_r", "leg_l", "leg_r"];
 _messageSent = false;
 _tick = 4;
