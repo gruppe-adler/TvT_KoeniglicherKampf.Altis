@@ -75,7 +75,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=53;
+		items=52;
 		class Item0
 		{
 			side="WEST";
@@ -2218,7 +2218,7 @@ class Mission
 						items=5;
 						class Item0
 						{
-							value="-1";
+							value="0";
 							parentCls="ACE_ModuleNameTags";
 							typeName="showPlayerNames";
 						};
@@ -2506,7 +2506,7 @@ class Mission
 						};
 						class Item1
 						{
-							value="1";
+							value="0";
 							parentCls="ACE_moduleMedicalSettings";
 							typeName="medicSetting";
 						};
@@ -2554,7 +2554,7 @@ class Mission
 						};
 						class Item9
 						{
-							value="1";
+							value="0";
 							parentCls="ACE_moduleMedicalSettings";
 							typeName="preventInstaDeath";
 						};
@@ -2634,26 +2634,38 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5800.1602,0,6399.2256};
+					position[]={5500.2119,0,6500.4326};
 					class args
 					{
-						items=2;
+						items=4;
 						class Item0
 						{
-							value="opfor_assistant, blufor_assistant";
-							parentCls="ACE_moduleAssignMedicRoles";
-							typeName="EnableList";
+							value="#adminLogged";
+							parentCls="ModuleCurator_F";
+							typeName="Owner";
 						};
 						class Item1
 						{
-							value="1";
-							parentCls="ACE_moduleAssignMedicRoles";
-							typeName="role";
+							value="";
+							parentCls="ModuleCurator_F";
+							typeName="Name";
+						};
+						class Item2
+						{
+							value="2";
+							parentCls="ModuleCurator_F";
+							typeName="Addons";
+						};
+						class Item3
+						{
+							value="0";
+							parentCls="ModuleCurator_F";
+							typeName="Forced";
 						};
 					};
 					id=168;
 					side="LOGIC";
-					vehicle="ACE_moduleAssignMedicRoles";
+					vehicle="ModuleCurator_F";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;
@@ -2668,13 +2680,13 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5500.2119,0,6500.4326};
+					position[]={5599.5293,0,6500.5303};
 					class args
 					{
 						items=4;
 						class Item0
 						{
-							value="#adminLogged";
+							value="#adminVoted";
 							parentCls="ModuleCurator_F";
 							typeName="Owner";
 						};
@@ -2714,52 +2726,6 @@ class Mission
 				items=1;
 				class Item0
 				{
-					position[]={5599.5293,0,6500.5303};
-					class args
-					{
-						items=4;
-						class Item0
-						{
-							value="#adminVoted";
-							parentCls="ModuleCurator_F";
-							typeName="Owner";
-						};
-						class Item1
-						{
-							value="";
-							parentCls="ModuleCurator_F";
-							typeName="Name";
-						};
-						class Item2
-						{
-							value="2";
-							parentCls="ModuleCurator_F";
-							typeName="Addons";
-						};
-						class Item3
-						{
-							value="0";
-							parentCls="ModuleCurator_F";
-							typeName="Forced";
-						};
-					};
-					id=170;
-					side="LOGIC";
-					vehicle="ModuleCurator_F";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item51
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
 					position[]={5700.875,0,6099.5884};
 					class args
 					{
@@ -2771,7 +2737,7 @@ class Mission
 							typeName="enable";
 						};
 					};
-					id=171;
+					id=170;
 					side="LOGIC";
 					vehicle="ACE_moduleCargoSettings";
 					leader=1;
@@ -2780,7 +2746,7 @@ class Mission
 				};
 			};
 		};
-		class Item52
+		class Item51
 		{
 			side="LOGIC";
 			class Vehicles
@@ -2811,7 +2777,7 @@ class Mission
 							typeName="HideAiGroups";
 						};
 					};
-					id=172;
+					id=171;
 					side="LOGIC";
 					vehicle="ACE_ModuleBlueForceTracking";
 					leader=1;

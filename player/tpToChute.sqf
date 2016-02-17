@@ -16,3 +16,5 @@ player addBackpackGlobal "B_Parachute";
 
 sleep 2;
 0 cutText ["", "BLACK IN", 4];
+
+TELEPORTEDTOCHUTE = true;

@@ -2,8 +2,8 @@
 class Header
 {
   gameType = TDM;
-  minPlayers = 1;
-  maxPlayers = 26;
+  minPlayers = 2;
+  maxPlayers = 150;
 };
 
 
@@ -77,7 +77,22 @@ class Params
 		texts[] = {"06:30", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "Random"};
 		default = 1000;
 	};
-		
+
+	class lootamount
+	{
+		title = "Loot";
+		values[] = {40,65,80};
+		texts[] = {"Low", "Normal", "High"};
+		default = 65;
+	};
+
+	class vehicleamount
+	{
+		title = "Amount of Vehicles";
+		values[] = {0,1,2};
+		texts[] = {"Low", "Normal", "High"};
+		default = 1;
+	};	
 };
 
 

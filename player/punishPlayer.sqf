@@ -12,9 +12,11 @@ diag_log "punishPlayer initialized";
 
 //Waituntil server has generated the first circle
 waitUntil {GAMESTARTED};
-diag_log "punishPlayer starting...";
-
 waitUntil {!isNil "NEWCIRCLEPOS"};
+waitUntil {!isNil "NEWCIRCLESIZE"};
+waitUntil {TELEPORTEDTOCHUTE};
+
+diag_log "punishPlayer starting...";
 
 //Set initial circle center unless entire island is used
 if (!ISLAND_USEWHOLE) then {
@@ -22,7 +24,7 @@ if (!ISLAND_USEWHOLE) then {
 	OLDSIZE = NEWCIRCLESIZE;
 };
 
-BODYPARTS = ["body", "hand_l", "hand_r", "leg_l", "leg_r"];
+BODYPARTS = ["body", "hand_l", "hand_r"];
 _messageSent = false;
 _tick = 4;
 
@@ -69,7 +71,7 @@ if (isServer) then {
 		private ["_tick", "_arrayDiff"];
 		_tick = _this select 0;
 
-		while {true} do {
+		while {alive player} do {
 			sleep _tick*2;
 			_arrayDiff = OLDCENTER - NEWCIRCLEPOS;
 			if ((count _arrayDiff) == 0) then {
@@ -97,11 +99,35 @@ else
 	"NEWCIRCLEPOS" addPublicVariableEventHandler {[] spawn updateVariables};
 };
 
+//Kill player if he is unconcious for too long =====================================================================================================
+[] spawn {
+	_currentTime = time;
+	_killTimeOutside = TIME_KILL_UNCONSCIOUS / 4;
 
+	while {alive player} do {
+
+		if (side player != west) then {
+
+			if ((player distance2D OLDCENTER) > OLDSIZE) then {
+
+				if (time - _currentTime > _killTimeOutside) then {
+					player setDamage 1;
+				};
+			} else {
+
+				if (time - _currentTime > TIME_KILL_UNCONCIOUS) then {
+					player setDamage 1;
+				};
+			};
+		};
+
+		sleep 5;
+	};
+};
 
 //Main loop ========================================================================================================================================
 
-while {true} do {
+while {alive player} do {
 	//Outside playzone?
 	if ((player distance2D OLDCENTER) > OLDSIZE) then {
 		diag_log format ["Player outside the zone. Message sending: %1", (!_messageSent)];
@@ -117,7 +143,7 @@ while {true} do {
 		{
 			_messageSent = false;
 			_bodyPart = BODYPARTS call BIS_fnc_selectRandom;
-			[player, 0.3, _bodyPart, "bullet"] call ace_medical_fnc_addDamageToUnit;
+			[player, 0.35, _bodyPart, "bullet"] call ace_medical_fnc_addDamageToUnit;
 			[] spawn mcd_fnc_paineffect;
 		};
 	}

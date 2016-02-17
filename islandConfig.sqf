@@ -98,7 +98,7 @@ ISLAND_CONFIG = [
 	[2000,1500,1000,600,400,200,100,50],		// circlesizes
 	true,										// use whole island as play area?
 	0,											// play area search radius (only if not whole island)
-	'Namalsk']									// name
+	'Namalsk'],									// name
 
 	[[1274,631,0],								// initial startposition
 	[2717,2475,0],								// island center

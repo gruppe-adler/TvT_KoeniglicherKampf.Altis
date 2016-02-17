@@ -62,7 +62,7 @@ _lootSpawnTotalCounter = 0;
 			_bPosCounter = _bPosCounter +1;
 			_buildingPos = _x buildingPos _bPosCounter;
 		};
-		if (DEBUG_MODE) then {diag_log format ["%1 spawned loot in %2 positions.", (typeOf _x), _lootSpawnCounter]};
+		//if (DEBUG_MODE) then {diag_log format ["%1 spawned loot in %2 positions.", (typeOf _x), _lootSpawnCounter]};
 	}
 	else
 	{

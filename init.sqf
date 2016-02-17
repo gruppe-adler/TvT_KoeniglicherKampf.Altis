@@ -5,16 +5,15 @@ call compile preprocessFile "islandConfig.sqf";
 disableRemoteSensors true;
 CIRCLESSTARTED = false;
 
-//Settings
+//Settings ======================================================================================================================
 TIME_UNTIL_ROUND_START = 30;
 TIME_UNTIL_FIRST_CIRCLE = 300;
 TIME_UNTIL_GETIN_FIRST = 300;
 TIME_UNTIL_GETIN = 120;
 TIME_UNTIL_FIRST_CAREPACKAGE = 180;
+TIME_KILL_UNCONSCIOUS = 120;				//4 times as fast if player is outside circle
 
 JUMP_HEIGHT = 1000;
-MINMAX_CARS = [10,25];
-LOOT_PROBABILITY = 65;
 LOOTSPAWN_TICKRATE = 0.2;
 CAREPACKAGE_INTERVAL = [120,300];
 CAREPACKAGE_DROPHEIGHT = 500;
@@ -34,8 +33,18 @@ GAME_TIME = paramsArray select 3;
 SCOPES_ALLOWED = (paramsArray select 4) == 1;
 WEATHER_SETTING = paramsArray select 5;
 TIME_OF_DAY = paramsArray select 6;
+LOOT_PROBABILITY = paramsArray select 7;
+CAR_AMOUNT = paramsArray select 8;
 
-//Weather
+switch (CAR_AMOUNT) do {
+	case 0: {MINMAX_CARS = [6,15]};
+	case 1: {MINMAX_CARS = [10,25]};
+	case 2: {MINMAX_CARS = [15,35]};	
+};
+
+
+
+//Weather =======================================================================================================================
 setCustomWeather = {
 	// skipTime -24; 
 	0 setOvercast (_this select 0); 
@@ -52,7 +61,7 @@ switch (WEATHER_SETTING) do {
 };
 
 
-//SERVER ONLY
+//SERVER ONLY ===================================================================================================================
 if (isServer) then {
 
 	// set to full moon date
@@ -102,6 +111,7 @@ if (isServer) then {
 //PLAYERS ONLY
 if (hasInterface) then {
 
+	TELEPORTEDTOCHUTE = false;
 	waitUntil {!isNil "TEAMSETUPSTARTED"};
 
 	if (didJIP && TEAMSETUPSTARTED) then {
