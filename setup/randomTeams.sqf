@@ -3,6 +3,7 @@
 * Executed via init.sqf on server
 */
 
+sleep 5;
 
 //Define TEAMLEADERS if random groups are off
 if (!(RANDOM_TEAMS) || ((count playableUnits) == 1)) then {
@@ -15,7 +16,7 @@ if (!(RANDOM_TEAMS) || ((count playableUnits) == 1)) then {
 if !(isNil "TEAMLEADERS") exitWith{diag_log "Random teams are off."};
 
 //==================================================================== Start of randomization
-sleep 15;
+
 ["Randomizing teams...",0,0,2,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
 sleep 5;
 

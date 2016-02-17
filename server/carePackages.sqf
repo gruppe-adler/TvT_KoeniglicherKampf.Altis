@@ -34,13 +34,14 @@ Optional Parameters:
 call compile preprocessFile "loot\carepackageConfig.sqf";
 mcd_fnc_spawnCarepackage = compile preprocessFileLineNumbers "loot\spawnCarepackage.sqf";
 
-private ["_timeMin", "_timeMax", "_carepackagePos"]
+private ["_timeMin", "_timeMax", "_carepackagePos"];
 
 _timeMin = CAREPACKAGE_INTERVAL select 0;
 _timeMax = CAREPACKAGE_INTERVAL select 1;
 
 
 waitUntil {GAMESTARTED};
+diag_log format ["Carepackages initialized - Waiting %1 seconds to spawn the first one.", TIME_UNTIL_FIRST_CAREPACKAGE];
 sleep TIME_UNTIL_FIRST_CAREPACKAGE;
 
 

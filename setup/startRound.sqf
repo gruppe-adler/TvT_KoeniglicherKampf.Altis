@@ -19,7 +19,17 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit"];
 		_marker setMarkerType "respawn_para";
 		_marker setMarkerColor "ColorGreen";
 	};
+	
+	for [{_i = 0},{_i < (count (units group _x))},{_i = _i + 1}] do {
+		_parachuteposition = _teamleadpos vectorAdd [_i*30,0,0];
+		_unit = (units group _x) select _i;
+		_unit setVariable ["PARACHUTEPOSITION", _parachuteposition, true];
+		
+		diag_log format ["Parachuteposition for %1: %2", (name _unit), _parachuteposition];
+		sleep 0.2;
+	};
 
+	/* OLD
 	//Positions for teammembers
 	for [{_i = 0},{_i < (count (units group _x))},{_i = _i + 1}] do {
 		_parachuteposition = _teamleadpos vectorAdd [_i*30,0,0];
@@ -27,8 +37,10 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit"];
 	};
 
 	//Save positions in teamleader
-	_x setVariable ["POSITIONS", PARACHUTEPOSITIONS, false];
+	_x setVariable ["POSITION", PARACHUTEPOSITIONS, false];
 	diag_log format ["Positions for %1's team: %2", name _x, _x getVariable "POSITIONS"];
+	*/
+
 
 } forEach TEAMLEADERS;
 
@@ -39,9 +51,20 @@ sleep TIME_UNTIL_ROUND_START;
 ["Game starting!",0,0,4,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
 sleep 4;
 
+//Make players teleport themselves
+[[], "player\tpToChute.sqf"] remoteExec ["execVM",0,false];
+
+
+
+/*OLD
 //Fade Out
 [0, ["", "BLACK FADED", 3, true]] remoteExec ["cutText", 0, false];
 sleep 2;
+
+{
+	_positions = _x getVariable "POSITIONS";
+
+} forEach TEAMLEADERS;
 
 //Teleport players
 {
@@ -52,11 +75,16 @@ sleep 2;
 		_unit addBackpackGlobal "B_Parachute";
 	};
 } forEach TEAMLEADERS;
+*/
+
 
 //Allow damage for players
 GAMESTARTED = true;
 publicVariable "GAMESTARTED";
 
+
+
+/*OLD
 //Fade In
 sleep 2;
 [0, ["", "BLACK IN", 4]] remoteExec ["cutText", 0, false];

@@ -21,7 +21,7 @@ mcd_fnc_endRound = {
 
 		sleep 7;
 		["Won"] call BIS_fnc_endMissionServer;
-	};
+	}
 	else {
 		if ((count PLAYINGGROUPS) == 0) then {
 			_message = "No one left alive! Game ending in a draw.";
@@ -51,8 +51,11 @@ while {true} do {
 
 	//Check if less than 2 groups have players
 	if ((count PLAYINGGROUPS) < 2) then {
-		[] spawn mcd_fnc_endRound;
+		_endrndhndl = [] spawn mcd_fnc_endRound;
+		waitUntil {scriptDone _endrndhndl};
 	};
 
 	sleep 2;
 };
+
+diag_log "Win condition initialized.";

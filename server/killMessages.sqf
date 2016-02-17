@@ -24,3 +24,4 @@ mcd_fnc_killMessage = {
 	_x addEventHandler ["killed", {[_this] spawn mcd_fnc_killMessage}];
 } forEach playableUnits;
 
+diag_log "Kill messages initialized.";

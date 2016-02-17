@@ -12,6 +12,3 @@ diag_log format ["Startposition read - Moving player to: %1", _teleportPosition]
 
 player setPos _teleportPosition;
 player switchmove "AmovPercMstpSnonWnonDnon";
-
-sleep 1;
-diag_log format ["Player moved to: %1", (position player)];

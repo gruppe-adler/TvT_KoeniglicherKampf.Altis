@@ -16,7 +16,8 @@ loadScreen = "pictures\logo.paa";
 
 //======================================================================= MISC
 enableDebugConsole = 2;
-
+respawnDelay = 9999999;
+respawnTemplates[] = {"ace_spectator"};
 
 //======================================================================= PARAMETERS
 class Params

@@ -15,7 +15,7 @@ JUMP_HEIGHT = 1000;
 MINMAX_CARS = [10,25];
 LOOT_PROBABILITY = 75;
 LOOTSPAWN_TICKRATE = 0.2;
-CAREPACKAGE_INTERVAL [120,300];
+CAREPACKAGE_INTERVAL = [120,300];
 CAREPACKAGE_DROPHEIGHT = 500;
 CAREPACKAGE_LOOTAMOUNT = 6;
 
@@ -32,31 +32,13 @@ RANDOM_TEAMS = (paramsArray select 1) == 1;
 TEAM_SIZE = paramsArray select 2;
 GAME_TIME = paramsArray select 3;
 
-//PLAYERS ONLY
-if (hasInterface) then {
-
-	//Damage
-	player allowDamage false;
-	"GAMESTARTED" addPublicVariableEventHandler {
-		player allowDamage true;
-		diag_log "Player allowed damage";
-	};
-
-	//Setup
-	[] execVM "player\startPosition.sqf";
-	[] execVM "player\startEquipment.sqf";
-	[] execVM "player\punishPlayer.sqf";
-	[] execVM "player\briefing.sqf";
-
-	//Intro
-	if (!didJIP) then {
-		//Intro
-		[] execVM "intro.sqf";
-	};
-};
-
 //SERVER ONLY
 if (isServer) then {
+
+	GAMESTARTED = false;
+	publicVariable "GAMESTARTED";
+	TEAMSETUPSTARTED = false;
+	publicVariable "TEAMSETUPSTARTED";
 
 	//TFAR
 	if (isClass (configFile >> "CfgPatches" >> "task_force_radio")) then {
@@ -69,10 +51,14 @@ if (isServer) then {
 
 	_vehhndl = [] execVM "setup\spawnVehicles.sqf";
 	_loothndl = [] execVM "loot\lootInit.sqf";
-	_teamshdnl = [] execVM "setup\randomTeams.sqf";
-	waitUntil {scriptDone _teamshdnl};
 	waitUntil {scriptDone _vehhndl};
 	waitUntil {scriptDone _loothndl};
+
+	TEAMSETUPSTARTED = true;
+	publicVariable "TEAMSETUPSTARTED";
+
+	_teamshdnl = [] execVM "setup\randomTeams.sqf";
+	waitUntil {scriptDone _teamshdnl};
 
 	_startrndhndl = [] execVM "setup\startRound.sqf";
 	waitUntil {scriptDone _startrndhndl};
@@ -83,4 +69,33 @@ if (isServer) then {
 	[] execVM "server\carePackages.sqf";
 	[] execVM "server\winCondition.sqf";
 
+};
+
+//PLAYERS ONLY
+if (hasInterface) then {
+
+	waitUntil {!isNil "TEAMSETUPSTARTED"};
+
+	if (didJIP && TEAMSETUPSTARTED) then {
+		player setDamage 1;
+	}
+	else {
+		//Damage
+		player allowDamage false;
+		"GAMESTARTED" addPublicVariableEventHandler {
+			player allowDamage true;
+			diag_log "Player allowed damage";
+		};
+
+		//Setup
+		[] execVM "player\startPosition.sqf";
+		[] execVM "player\startEquipment.sqf";
+		[] execVM "player\punishPlayer.sqf";
+		[] execVM "player\briefing.sqf";
+
+		//Intro
+		if (!didJIP) then {
+			[] execVM "intro.sqf";
+		};
+	};
 };
