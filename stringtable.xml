@@ -4,9 +4,9 @@
 
 		<Container name="mission briefing">
 			<Key ID="str_GRAD_story">
-				<Original>asd</Original>
-				<English>asd</English>
-				<German>asd</German>
+				<Original>Story.</Original>
+				<English>Story.</English>
+				<German>Story.</German>
 			</Key>
 
 			<Key ID="str_GRAD_brief2title">

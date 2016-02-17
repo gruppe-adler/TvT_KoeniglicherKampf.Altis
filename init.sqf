@@ -81,5 +81,6 @@ if (isServer) then {
 	[] execVM "server\blueCircles.sqf";
 	[] execVM "server\killMessages.sqf";
 	[] execVM "server\carePackages.sqf";
+	[] execVM "server\winCondition.sqf";
 
 };
