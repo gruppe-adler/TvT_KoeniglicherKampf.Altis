@@ -11,7 +11,7 @@ diag_log "punishPlayer initialized";
 
 
 //Waituntil server has generated the first circle
-waitUntil {CIRCLESSTARTED};
+waitUntil {GAMESTARTED};
 diag_log "punishPlayer starting...";
 
 

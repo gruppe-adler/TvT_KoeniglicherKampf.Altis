@@ -11,7 +11,8 @@ _circleID = 0;
 //Define 0th circle as playarea, so that carepackages may spawn before the first circle
 NEWCIRCLEPOS = PLAYAREACENTER;
 NEWCIRCLESIZE = ISLAND_PLAYAREASIZE;
-
+publicVariable "NEWCIRCLEPOS";
+publicVariable "NEWCIRCLESIZE";
 
 //How often are new circles spawned?
 _circleInterval = (GAME_TIME - TIME_UNTIL_FIRST_CIRCLE - TIME_UNTIL_GETIN_FIRST) / (count _circleSizes);

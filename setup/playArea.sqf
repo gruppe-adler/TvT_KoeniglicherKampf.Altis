@@ -53,4 +53,6 @@ else {
 	_marker setMarkerSize [ISLAND_PLAYAREASIZE, ISLAND_PLAYAREASIZE];
 
 	diag_log format ["Using circle around %1 with radius %2 as play area.", PLAYAREACENTER, ISLAND_PLAYAREASIZE];
+  publicVariable "PLAYAREACENTER";
+  publicVariable "ISLAND_PLAYAREASIZE";
 };
