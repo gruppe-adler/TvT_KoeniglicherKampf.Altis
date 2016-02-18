@@ -25,7 +25,7 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit"];
 		_unit = (units group _x) select _i;
 		_unit setVariable ["PARACHUTEPOSITION", _parachuteposition, true];
 		
-		diag_log format ["Parachuteposition for %1: %2", (name _unit), _parachuteposition];
+		if (DEBUG_MODE) then {diag_log format ["Parachuteposition for %1: %2", (name _unit), _parachuteposition]};
 		sleep 0.2;
 	};
 

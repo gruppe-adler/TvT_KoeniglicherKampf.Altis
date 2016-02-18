@@ -6,7 +6,7 @@ disableRemoteSensors true;
 CIRCLESSTARTED = false;
 
 //Settings ======================================================================================================================
-TIME_UNTIL_ROUND_START = 30;
+TIME_UNTIL_ROUND_START = 10;
 TIME_UNTIL_FIRST_CIRCLE = 300;
 TIME_UNTIL_GETIN_FIRST = 300;
 TIME_UNTIL_GETIN = 120;
@@ -97,6 +97,14 @@ if (isServer) then {
 	_teamshdnl = [] execVM "setup\randomTeams.sqf";
 	waitUntil {scriptDone _teamshdnl};
 
+	_genSWhndl = [] execVM "setup\generateSWfreq.sqf";
+	waitUntil {scriptDone _genSWhndl};
+
+	//Manual gamestart in debug mode
+	DEBUG_START = false;
+	if (!DEBUG_MODE) then {DEBUG_START = true};
+	waitUntil {DEBUG_START};
+
 	_startrndhndl = [] execVM "setup\startRound.sqf";
 	waitUntil {scriptDone _startrndhndl};
 
@@ -110,6 +118,8 @@ if (isServer) then {
 
 //PLAYERS ONLY
 if (hasInterface) then {
+
+	if (DEBUG_MODE) then {[] execVM "debug\trigger.sqf"};
 
 	TELEPORTEDTOCHUTE = false;
 	waitUntil {!isNil "TEAMSETUPSTARTED"};

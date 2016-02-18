@@ -14,7 +14,7 @@ _vanillaUniforms = [
 ];
 
 
-_randomUniform = _vanillaUniforms call BIS_fnc_selectRandom;
+_randomUniform = selectRandom _vanillaUniforms;
 
 
 //Add equipment

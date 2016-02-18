@@ -39,7 +39,7 @@ mcd_fnc_paineffect = {
 	_effect = [0.03, 0.03, false];
 
 	_sounds = ["WoundedGuyB_01","WoundedGuyB_02","WoundedGuyB_03","WoundedGuyB_04","WoundedGuyB_05","WoundedGuyB_06","WoundedGuyB_07","WoundedGuyB_08"];
-	_sound = _sounds call BIS_fnc_selectRandom;
+	_sound = selectRandom _sounds;
 	player say3D _sound;
 
 	while {
@@ -142,7 +142,7 @@ while {alive player} do {
 		else
 		{
 			_messageSent = false;
-			_bodyPart = BODYPARTS call BIS_fnc_selectRandom;
+			_bodyPart = selectRandom BODYPARTS;
 			[player, 0.35, _bodyPart, "bullet"] call ace_medical_fnc_addDamageToUnit;
 			[] spawn mcd_fnc_paineffect;
 		};

@@ -50,7 +50,7 @@ _vehicleAmount = floor ((random _max) max _min)+1;
 diag_log format ["Spawning %1 vehicles.", _vehicleAmount];
 
 for [{_i = 0},{_i < _vehicleAmount},{_i = _i + 1}] do {
-	_vehicle = _vehicles call BIS_fnc_selectRandom;
+	_vehicle = selectRandom _vehicles;
 
   _spawnFound = false;
   while {!_spawnFound} do {

@@ -47,7 +47,7 @@ else
 
 //Select teamleaders
 for [{_i = 0},{_i < _numberOfTeams},{_i = _i + 1}] do {
-	_teamlead = _players call BIS_fnc_selectRandom; 
+	_teamlead = selectRandom _players; 
 	_players = _players - [_teamlead];
 	TEAMLEADERS = TEAMLEADERS + [_teamlead];
 };
@@ -68,7 +68,7 @@ for [{_i = 0},{_i < (TEAM_SIZE - 1)}, {_i = _i + 1}] do {
 		}
 		else
 		{
-			_teammember = _players call BIS_fnc_selectRandom;
+			_teammember = selectRandom _players;
 			_players = _players - [_teammember];
 			[_teammember] joinSilent _x; 
 			diag_log format ["%1 added to %2's team.", (name _teammember), (_teamleadernames select _teamleadID)];

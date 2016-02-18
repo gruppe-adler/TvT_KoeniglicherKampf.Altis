@@ -64,12 +64,12 @@ if (DEBUG_MODE) then {
 
 // Spawn Weapon
 if (_type == 0) then {
-	_loot= weaponsLoot call bis_fnc_selectRandom; 
+	_loot= selectRandom weaponsLoot; 
 
 	_magazines = getArray (configFile / "CfgWeapons" / _loot / "magazines");
 
 	if ((count _magazines) > 0) then {
-		_magazineClass = _magazines call bis_fnc_selectRandom; 
+		_magazineClass = selectRandom _magazines; 
 
 		_holder addWeaponCargoGlobal [_loot, 1];
 		_holder addMagazineCargoGlobal [_magazineClass, (floor random 3.99)];
@@ -81,11 +81,11 @@ if (_type == 0) then {
 
 // Spawn Magazines
 if (_type == 1) then {
-	_weapon= weaponsLoot call bis_fnc_selectRandom; 
+	_weapon= selectRandom weaponsLoot; 
 	_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
 
 	if ((count _magazines) > 0) then {
-		_loot = _magazines call bis_fnc_selectRandom; 
+		_loot = selectRandom _magazines; 
 
 		_amount = (floor (random 4.99)) max 1;
 		_holder addMagazineCargoGlobal [_loot, _amount];
@@ -98,24 +98,24 @@ if (_type == 1) then {
 
 // Spawn Clothing
 if (_type == 2) then {
-	_loot= itemsLoot call bis_fnc_selectRandom;
+	_loot= selectRandom itemsLoot;
 	_holder addItemCargoGlobal [_loot, 1];
 
-	_loot= clothesLoot call bis_fnc_selectRandom;
+	_loot= selectRandom clothesLoot;
 	_holder addItemCargoGlobal [_loot, 1];
 };	
 
 
 // Spawn Vests
 if (_type == 3) then {
-	_loot= vestsLoot call bis_fnc_selectRandom;
+	_loot= selectRandom vestsLoot;
 	_holder addItemCargoGlobal [_loot, 1];
 };
 
 
 // Spawn Backpacks
 if (_type == 4) then {
-	_loot= backpacksLoot call bis_fnc_selectRandom;
+	_loot= selectRandom backpacksLoot;
 	_holder addBackpackCargoGlobal [_loot, 1];
 };
 
@@ -123,7 +123,7 @@ if (_type == 4) then {
 // Spawn Medical
 if (_type == 5) then {
 	_amount = (floor (random 4.99)) max 1;
-	_loot= medicalLoot call bis_fnc_selectRandom;
+	_loot= selectRandom medicalLoot;
 	_holder addItemCargoGlobal [_loot, _amount];
 };
 
@@ -131,24 +131,24 @@ if (_type == 5) then {
 //Spawn Grenades
 if (_type == 6) then {
 	_amount = (floor (random 2.99)) max 1;
-	_loot= grenadeLoot call bis_fnc_selectRandom;
+	_loot= selectRandom grenadeLoot;
 	_holder addItemCargoGlobal [_loot, _amount];
 };
 
 //Spawn Weapon Accessories
 if (_type == 7) then {
-	_loot= weaponAccessoryLoot call bis_fnc_selectRandom;
+	_loot= selectRandom weaponAccessoryLoot;
 	_holder addItemCargoGlobal [_loot, 1];
 };
 
 //Spawn Sights
 if (_type == 8) then {
-	_loot= sightsLoot call bis_fnc_selectRandom;
+	_loot= selectRandom sightsLoot;
 	_holder addItemCargoGlobal [_loot, 1];
 };
 
 //Spawn Scopes
 if (_type == 9) then {
-	_loot= scopesLoot call bis_fnc_selectRandom;
+	_loot= selectRandom scopesLoot;
 	_holder addItemCargoGlobal [_loot, 1];
 };
