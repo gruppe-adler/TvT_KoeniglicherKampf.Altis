@@ -119,7 +119,6 @@ clothesLoot = [
 	"rhs_uniform_cu_ucp",
 	"U_B_CTRG_1",
 	"rhs_uniform_df15",
-	"rhs_uniform_vdv_emr_des",
 	"rhs_uniform_emr_patchless",
 	"rhs_uniform_flora_patchless",
 	"U_O_CombatUniform_ocamo",

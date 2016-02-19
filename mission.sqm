@@ -50,8 +50,7 @@ class Mission
 		"ace_repair",
 		"ace_respawn",
 		"ace_medical",
-		"3DEN",
-		"a3_modules_f_curator_curator",
+		"A3_Modules_F_Curator_Curator",
 		"ace_cargo",
 		"a3_map_altis"
 	};
@@ -75,7 +74,7 @@ class Mission
 	};
 	class Groups
 	{
-		items=52;
+		items=51;
 		class Item0
 		{
 			side="WEST";
@@ -2104,7 +2103,7 @@ class Mission
 						items=1;
 						class Item0
 						{
-							value="1";
+							value="0";
 							parentCls="ACE_ModuleInteraction";
 							typeName="EnableTeamManagement";
 						};
@@ -2129,7 +2128,7 @@ class Mission
 					position[]={5799.5967,0,5999.2036};
 					class args
 					{
-						items=5;
+						items=6;
 						class Item0
 						{
 							value="1";
@@ -2159,6 +2158,12 @@ class Mission
 							value="0";
 							parentCls="ACE_ModuleMap";
 							typeName="MapShowCursorCoordinates";
+						};
+						class Item5
+						{
+							value="-1";
+							parentCls="ACE_ModuleMap";
+							typeName="DefaultChannel";
 						};
 					};
 					id=158;
@@ -2740,46 +2745,6 @@ class Mission
 					id=170;
 					side="LOGIC";
 					vehicle="ACE_moduleCargoSettings";
-					leader=1;
-					lock="UNLOCKED";
-					skill=0.60000002;
-				};
-			};
-		};
-		class Item51
-		{
-			side="LOGIC";
-			class Vehicles
-			{
-				items=1;
-				class Item0
-				{
-					position[]={5802.3745,0,6199.2432};
-					class args
-					{
-						items=3;
-						class Item0
-						{
-							value="0";
-							parentCls="ACE_ModuleBlueForceTracking";
-							typeName="Enabled";
-						};
-						class Item1
-						{
-							value="1";
-							parentCls="ACE_ModuleBlueForceTracking";
-							typeName="Interval";
-						};
-						class Item2
-						{
-							value="0";
-							parentCls="ACE_ModuleBlueForceTracking";
-							typeName="HideAiGroups";
-						};
-					};
-					id=171;
-					side="LOGIC";
-					vehicle="ACE_ModuleBlueForceTracking";
 					leader=1;
 					lock="UNLOCKED";
 					skill=0.60000002;

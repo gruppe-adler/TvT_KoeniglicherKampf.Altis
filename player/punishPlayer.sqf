@@ -115,7 +115,7 @@ else
 				};
 			} else {
 
-				if (time - _currentTime > TIME_KILL_UNCONCIOUS) then {
+				if (time - _currentTime > TIME_KILL_UNCONSCIOUS) then {
 					player setDamage 1;
 				};
 			};

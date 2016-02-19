@@ -15,9 +15,8 @@ loadScreen = "pictures\logo.paa";
 
 
 //======================================================================= MISC
-enableDebugConsole = 2;
+enableDebugConsole = 1;
 respawnDelay = 9999999;
-respawnTemplates[] = {"ace_spectator"};
 
 //======================================================================= PARAMETERS
 class Params
@@ -113,5 +112,27 @@ class CfgRemoteExec
        {
               /*your commands here*/
               class execVM { allowedTargets=0;} // can target anyone, sending jip is turned off (overrides settings in the Commands class)
+	};
+};
+
+//======================================================================
+
+class ACE_Settings {
+   	class ace_map_BFT_Interval {
+	    value = 1;
+	    typeName = "SCALAR";
+	    force = 1;
+	};
+
+	class ace_map_BFT_Enabled {
+	    value = 0;
+	    typeName = "BOOL";
+	    force = 1;
+	};
+
+	class ace_map_BFT_HideAiGroups {
+	    value = 0;
+	    typeName = "BOOL";
+	    force = 1;
 	};
 };

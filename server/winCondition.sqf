@@ -4,6 +4,7 @@
 */
 
 waitUntil {GAMESTARTED};
+private ["_group"];
 
 PLAYINGGROUPS = allGroups;
 
@@ -44,18 +45,21 @@ mcd_fnc_endRound = {
 while {true} do {
 	//Check what groups still have players
 	{
-		if ((count units _x) == 0) then {
-			PLAYINGGROUPS = PLAYINGGROUPS - [_x];
+		_group = _x;
+		if ((count units _group) <= 0) then {
+			PLAYINGGROUPS = PLAYINGGROUPS - [_group];
+			diag_log format ["No more players in group %1", _group];
 		};
 	} forEach PLAYINGGROUPS;
 
 	//Check if less than 2 groups have players
 	if ((count PLAYINGGROUPS) < 2) then {
+		diag_log "Less than 2 groups left. Ending the game.";
 		_endrndhndl = [] spawn mcd_fnc_endRound;
 		waitUntil {scriptDone _endrndhndl};
 	};
 
-	sleep 2;
+	sleep 5;
 };
 
 diag_log "Win condition initialized.";

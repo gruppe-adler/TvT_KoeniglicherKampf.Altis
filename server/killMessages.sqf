@@ -10,6 +10,7 @@ mcd_fnc_killMessage = {
 	_unit = (_this select 0) select 0;
 	_killer = (_this select 0) select 1;
 
+	diag_log format ["%1 was killed by %2 - sending killmessage in 15 seconds.", (name _unit), (name _killer)];
 	//15 second delay, so you don't get an instant confirmation if you hit someone
 	sleep 15;
 
