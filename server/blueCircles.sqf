@@ -3,10 +3,19 @@
 * Executed after round start via init.sqf on server
 */
 
-private ["_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext"];
-_initialRadius = (ISLAND_CONFIG select (ISLANDS find worldName)) select 3;
+private ["_firstOfTheLast","_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext"];
+
+
 _circleSizes = (ISLAND_CONFIG select (ISLANDS find worldName)) select 4;
+//_circleSizes = CIRCLESIZES;
 _circleID = 0;
+
+//Only use islandconfig for first blue circle searchradius, if whole island is used
+if (ISLAND_USEWHOLE) then {
+	_initialRadius = (ISLAND_CONFIG select (ISLANDS find worldName)) select 3;
+} else {
+	_initialRadius = ISLAND_PLAYAREASIZE - (_circleSizes select 0);
+};
 
 //Define 0th circle as playarea, so that carepackages may spawn before the first circle
 NEWCIRCLEPOS = PLAYAREACENTER;
@@ -15,10 +24,15 @@ publicVariable "NEWCIRCLEPOS";
 publicVariable "NEWCIRCLESIZE";
 
 //How often are new circles spawned?
+/*
 _circleInterval = (GAME_TIME - TIME_UNTIL_FIRST_CIRCLE - TIME_UNTIL_GETIN_FIRST) / (count _circleSizes);
 if (_circleInterval < (TIME_UNTIL_GETIN - 30)) then {
 	_circleInterval = (TIME_UNTIL_GETIN - 30);
 };
+*/
+
+_circleInterval = CIRCLE_INTERVAL;
+_firstOfTheLast = _circleSizes select ((count _circleSizes) - NUMBER_OF_FAST_CIRCLES);
 
 //Setting in init.sqf
 diag_log format ["blueCircles initialized - waiting %1 seconds until first circle spawns", TIME_UNTIL_FIRST_CIRCLE];
@@ -29,6 +43,7 @@ diag_log "blue circles starting...";
 diag_log "Settings:";
 diag_log format ["Initial Radius: %1", _initialRadius];
 diag_log format ["Circle Interval: %1", _circleInterval];
+
 
 
 //Main loop
@@ -44,7 +59,7 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 	else
 	{
 		//Calculate searchradius for new circle center
-		_searchRadius = (_circleSizes select (_i- 1)) - (_circleSizes select _i);
+		_searchRadius = (_circleSizes select (_i - 1)) - (_circleSizes select _i);
 		_firstCircle = false;
 	};
 
@@ -100,12 +115,18 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 	else 
 	{
 		sleep 10; 
-		_messagetext = format ["You have %1 minutes to get inside the new blue circle!", (TIME_UNTIL_GETIN / 60)];
+		_messagetext = format ["In %1 minutes, play will be limited to the area inside blue circle!", (TIME_UNTIL_GETIN / 60)];
 		[_messagetext,0,0,4,1] remoteExec ["BIS_fnc_dynamicText",0,false];
-	};
 
-	//Sleep until next circle
-	sleep _circleInterval;
+		//If its the endgame circles, reduce interval
+		if (NEWCIRCLESIZE == _firstOfTheLast) then {
+			_circleInterval = CIRCLE_INTERVAL_LASTFEW;
+		};
+
+		//Sleep until next circle
+		diag_log format ["blueCircles - sleeping %1 seconds until next circle", _circleInterval];
+		sleep _circleInterval;
+	};
 };
 
 //Circles over - End game

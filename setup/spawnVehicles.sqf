@@ -39,8 +39,22 @@ _vehicles = [
 "C_Hatchback_01_sport_red_F",
 "C_Hatchback_01_green_F",
 "C_Quadbike_01_F",
-"C_Offroad_01_F"
+"C_Offroad_01_F",
+
+"RDS_Golf4_Civ_01",
+"RDS_Gaz24_Civ_01",
+"RDS_S1203_Civ_01",
+"RDS_Octavia_Civ_01",
+
+"RHS_UAZ_MSV_01"
 ];
+
+_armedVehicles = [
+"I_G_Offroad_01_armed_F",
+"rhs_uaz_dshkm_chdkz"
+];
+
+if (ARMED_VEHICLES) then {_vehicles = _vehicles + _armedVehicles};
 
 private ["_vehicleAmount","_min","_max", "_spawnpos", "_vehicle", "_spawnedVehicle", "_spawnFound"];
 _min = MINMAX_CARS select 0;

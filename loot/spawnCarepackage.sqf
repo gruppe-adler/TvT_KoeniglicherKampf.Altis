@@ -27,7 +27,7 @@ _box attachTo [_chute, [0, 0, -0.5]];
 //Play aircraft sound
 [_box, "BattlefieldJet2"] remoteExec ["say3D", 0, false];
 
-//Wait until box is on the ground
+//Wait until box is on the ground // cant use isTouchingGround here as it is too inaccurate
 _oldHeight = (getPos _box) select 2;
 sleep 3;
 _inTheAir = true;

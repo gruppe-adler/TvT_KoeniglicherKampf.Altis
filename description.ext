@@ -26,7 +26,7 @@ class Params
 		title = "Debug Mode";
 		values[] = {true, false};
 		texts[] = {"On", "Off"};
-		default = true;
+		default = false;
 	};
 
 	class randomteams
@@ -47,10 +47,10 @@ class Params
 
 	class gametime
 	{
-		title = "Max. Game Length";
-		values[] = {4800, 4200, 3600, 3000, 2400, 1800};
-		texts[] = {"80 min", "70 min", "60 min", "50 min", "40 min", "30 min"};
-		default = 2400;
+		title = "Game Pace";
+		values[] = {200,300,400};
+		texts[] = {"Fast", "Normal", "Slow"};
+		default = 300;
 	};
 
 	class scopes
@@ -91,6 +91,14 @@ class Params
 		values[] = {0,1,2};
 		texts[] = {"Low", "Normal", "High"};
 		default = 1;
+	};	
+
+	class armedvehicles
+	{
+		title = "Armed Vehicles";
+		values[] = {true, false};
+		texts[] = {"On", "Off"};
+		default = false;
 	};	
 };
 

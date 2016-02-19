@@ -52,7 +52,7 @@ while {true} do {
 	_isWater = true;
 	while {_isWater} do {
 
-		_carepackagePos = [NEWCIRCLEPOS, NEWCIRCLESIZE, [0,360], 1] call SHK_pos;
+		_carepackagePos = [NEWCIRCLEPOS, [0,NEWCIRCLESIZE], [0,360], 1] call SHK_pos;
 		_isWater = surfaceIsWater _carepackagePos;
 	};
 	//Add dropheight

@@ -31,34 +31,48 @@ Optional Parameters:
                             [...,heli]             Only vehicle object given
 */
 
+/*
+//Generate circlesizes based on game length
+_timeMidgame = GAME_TIME - TIME_UNTIL_FIRST_CIRCLE - TIME_UNTIL_GETIN_FIRST - ((count CIRCLESIZES_LASTFEW) * CIRCLE_INTERVAL_LASTFEW);
+_numberOfCircles = _timeMidgame / CIRCLE_INTERVAL;
+_firstOfTheLast = CIRCLESIZES_LASTFEW select ((count CIRCLESIZES_LASTFEW) -1);
+CIRCLESIZES = CIRCLESIZES_LASTFEW;
+
+for [{_i=1},{_i<=_numberOfCircles},{_i=_i+1}] do {
+
+  CIRCLESIZES pushBack (CIRCLE_STEP * _i + _firstOfTheLast);
+};
+
+//from big to small
+reverse CIRCLESIZES;
+diag_log format ["Circlesizes are: %1", CIRCLESIZES];
+*/
+
 //whole island?
 if (ISLAND_USEWHOLE) then {
 	PLAYAREACENTER = ISLAND_CENTER;
-  ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 2000;
+  ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 800;
 	diag_log "Using whole island as play area.";
 }
 else {
 
+  //ISLAND_PLAYAREASIZE = (CIRCLESIZES select 0) + 500;
   ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 500;
 
   //if you use "find closest land" instead of this, center will be more likely to be near coast
  	_isWater = true;
 	_towns = true;
-	while {_isWater && _towns} do {
-		_towns = true;
-		PLAYAREACENTER = [ISLAND_CENTER, ISLAND_PLAYAREASEARCHRADIUS, [0,360], 1] call SHK_pos;
+	while {_isWater || _towns} do {
+		PLAYAREACENTER = [ISLAND_CENTER, [0,ISLAND_PLAYAREASEARCHRADIUS], [0,360], 1] call SHK_pos;
 		_isWater = surfaceIsWater PLAYAREACENTER;
+		_townsnum  = count nearestLocations [PLAYAREACENTER, ["NameVillage", "NameCity", "NameCityCapital"], ISLAND_PLAYAREASIZE];
 
-		_townsnum  = count nearestLocations [PLAYAREACENTER, ["NameVillage", "NameCity", "NameCityCapital"], 3500];
-
-		if (_townsnum >= 3) then {
+		if (_townsnum >= 2) then {
 		    _towns = false;
 		} else {
-		    _isWater = true;
+		    _towns = true;
 		};
 	};
-
-
 
 	_marker = createMarker ["island_playareamarker", PLAYAREACENTER];
 	_marker setMarkerShape "ELLIPSE";

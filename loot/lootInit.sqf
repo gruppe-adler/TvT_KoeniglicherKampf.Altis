@@ -3,19 +3,26 @@
 * executed via init.sqf on server
 */
 
-private ["_houseList", "_bPosCounter", "_type","_cleanUpCounter", "_lootSpawnCounter", "_lootSpawnTotalCounter", "_startTime", "_lootSpawned"];
+private ["_houseList", "_bPosCounter", "_type","_cleanUpCounter", "_lootSpawnCounter", "_lootSpawnTotalCounter", "_startTime", "_lootSpawned", "_searchAreaSize","_houseCounter","_halfNumberOfHouses"];
 
 //Load config and loot spawn function
-mcd_fnc_spawnLoot = compile preprocessFileLineNumbers "loot\spawnLoot.sqf";
+mcd_fnc_spawnLoot = compile preprocessFileLineNumbers "functions\fn_spawnLoot.sqf";
 call compile preprocessFileLineNumbers "loot\lootConfig.sqf";
 sleep 2;
 
 //Read settings
 _startTime = serverTime;
-diag_log format ["Loot spawning initialized around %1 with a search radius of %2", PLAYAREACENTER, ISLAND_PLAYAREASIZE];
 
 //Find buildings, save into house list
-_houseList =  PLAYAREACENTER nearObjects ["House",ISLAND_PLAYAREASIZE];
+if (ISLAND_USEWHOLE) then {
+	_searchAreaSize = ISLAND_PLAYAREASIZE + 2000;
+} else {
+	_searchAreaSize = ISLAND_PLAYAREASIZE;
+};
+
+diag_log format ["Loot spawning initialized around %1 with a search radius of %2", PLAYAREACENTER, _searchAreaSize];
+
+_houseList =  PLAYAREACENTER nearObjects ["House",_searchAreaSize];
 diag_log format ["%1 houses found:", (count _houseList)];
 
 //Clean up house list (remove buildings that are unable to spawn loot)
@@ -37,6 +44,8 @@ if (DEBUG_MODE) then {HOUSELIST = _houseList; BUGGEDLOOTCOUNTER = 0};
 
 //Main loop - spawn loot in each house
 _lootSpawnTotalCounter = 0;
+_houseCounter = 0;
+_halfNumberOfHouses = (count _houseList) / 2;
 {
 	_bPosCounter = 0;
 	_lootSpawnCounter = 0;
@@ -69,6 +78,11 @@ _lootSpawnTotalCounter = 0;
 		diag_log format ["%1 is excluded as per exclusionList", _type];
 	};		
 	_lootSpawnTotalCounter = _lootSpawnTotalCounter + _lootSpawnCounter;
+	_houseCounter = _houseCounter +1;
+	if (_houseCounter == _halfNumberOfHouses) then {
+		["Lootspawning halfway done.",0,0,2,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
+	};
+
 
 	//If this runs too fast, loot will spawn at [0,0,0]
 	if (_lootSpawned) then {sleep LOOTSPAWN_TICKRATE};	

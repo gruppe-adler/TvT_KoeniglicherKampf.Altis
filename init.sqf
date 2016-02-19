@@ -6,18 +6,22 @@ disableRemoteSensors true;
 CIRCLESSTARTED = false;
 
 //Settings ======================================================================================================================
-TIME_UNTIL_ROUND_START = 10;
-TIME_UNTIL_FIRST_CIRCLE = 300;
-TIME_UNTIL_GETIN_FIRST = 300;
-TIME_UNTIL_GETIN = 120;
-TIME_UNTIL_FIRST_CAREPACKAGE = 180;
+TIME_UNTIL_ROUND_START = 10;				//how long until the round starts after setup\startround.sqf is executed
+TIME_UNTIL_FIRST_CIRCLE = 300;				//how long until the first circle spawns
+TIME_UNTIL_GETIN_FIRST = 300;				//how long you have to get into the first circle
+TIME_UNTIL_GETIN = 120;						//how long you have to get into the circles
+TIME_UNTIL_FIRST_CAREPACKAGE = 180;			//how long until the first carepackage spawns
 TIME_KILL_UNCONSCIOUS = 120;				//4 times as fast if player is outside circle
 
-JUMP_HEIGHT = 1000;
-LOOTSPAWN_TICKRATE = 0.2;
-CAREPACKAGE_INTERVAL = [120,300];
-CAREPACKAGE_DROPHEIGHT = 500;
-CAREPACKAGE_LOOTAMOUNT = 6;
+//CIRCLE_STEP = 250;
+CIRCLE_INTERVAL_LASTFEW = 180;				//see below
+NUMBER_OF_FAST_CIRCLES = 5;					//the last x circles will spawn in the circle_interval_lastfew interval
+
+JUMP_HEIGHT = 1000;							//height the players are dropped from at round start
+LOOTSPAWN_TICKRATE = 0.18;					//the less the tickrate, the faster, but the more buggy loot
+CAREPACKAGE_INTERVAL = [150,360];			//carepackages spawn between select 0 and select 1 seconds after another
+CAREPACKAGE_DROPHEIGHT = 500;				//the z-coord ATL carepackages are spawned at
+CAREPACKAGE_LOOTAMOUNT = 6;					//how much loot spawns around a single carepackage
 
 //Read Islandconfig
 ISLAND_CENTER = (ISLAND_CONFIG select (ISLANDS find worldName)) select 1;
@@ -29,12 +33,14 @@ ISLAND_PLAYAREASEARCHRADIUS = (ISLAND_CONFIG select (ISLANDS find worldName)) se
 DEBUG_MODE = (paramsArray select 0) == 1;
 RANDOM_TEAMS = (paramsArray select 1) == 1;
 TEAM_SIZE = paramsArray select 2;
-GAME_TIME = paramsArray select 3;
+CIRCLE_INTERVAL = paramsArray select 3;					
+//GAME_TIME = paramsArray select 3;
 SCOPES_ALLOWED = (paramsArray select 4) == 1;
 WEATHER_SETTING = paramsArray select 5;
 TIME_OF_DAY = paramsArray select 6;
 LOOT_PROBABILITY = paramsArray select 7;
 CAR_AMOUNT = paramsArray select 8;
+ARMED_VEHICLES = (paramsArray select 9) == 1;
 
 switch (CAR_AMOUNT) do {
 	case 0: {MINMAX_CARS = [6,15]};
@@ -110,7 +116,6 @@ if (isServer) then {
 
 	//Game
 	[] execVM "server\blueCircles.sqf";
-	[] execVM "server\killMessages.sqf";
 	[] execVM "server\carePackages.sqf";
 	[] execVM "server\winCondition.sqf";
 
@@ -122,28 +127,25 @@ if (hasInterface) then {
 	if (DEBUG_MODE) then {[] execVM "debug\trigger.sqf"};
 
 	TELEPORTEDTOCHUTE = false;
-	waitUntil {!isNil "TEAMSETUPSTARTED"};
 
-	if (didJIP && TEAMSETUPSTARTED) then {
-		player setDamage 1;
-	}
-	else {
-		//Damage
-		player allowDamage false;
-		"GAMESTARTED" addPublicVariableEventHandler {
-			player allowDamage true;
-			diag_log "Player allowed damage";
-		};
+	//Damage
+	player allowDamage false;
+	"GAMESTARTED" addPublicVariableEventHandler {
+		player allowDamage true;
+		diag_log "Player allowed damage";
+	};
 
-		//Setup
-		[] execVM "player\startPosition.sqf";
-		[] execVM "player\startEquipment.sqf";
-		[] execVM "player\punishPlayer.sqf";
-		[] execVM "player\briefing.sqf";
+	//Setup
+	[] execVM "player\killJIP.sqf";
+	[] execVM "player\startPosition.sqf";
+	[] execVM "player\startEquipment.sqf";
+	[] execVM "player\punishPlayer.sqf";
+	[] execVM "player\briefing.sqf";
+	[] execVM "player\killMessages.sqf";
 
-		//Intro
-		if (!didJIP) then {
-			[] execVM "intro.sqf";
-		};
+	//Intro
+	if (!didJIP) then {
+		[] execVM "intro.sqf";
+
 	};
 };
