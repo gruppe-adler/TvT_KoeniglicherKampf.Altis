@@ -56,10 +56,6 @@ else {
 		} else {
 		    _isWater = true;
 		};
-
-		diag_log format ["Towns true or not? : %1", _towns];
-
-		diag_log format ["Towns: %1, PLAYAREACENTER %2", _townsnum, PLAYAREACENTER ];
 	};
 
 
