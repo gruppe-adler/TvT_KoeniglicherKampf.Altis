@@ -1,5 +1,5 @@
 /* Spawns loot on the map
-* 
+*
 * executed via init.sqf on server
 */
 
@@ -60,12 +60,12 @@ _halfNumberOfHouses = (count _houseList) / 2;
 
 		//As long as the buildingpos exists, do:
 		while {((str _buildingPos) != "[0,0,0]")} do {
-			
+
 			if (LOOT_PROBABILITY > random 100) then {
 				[_buildingPos] spawn mcd_fnc_spawnLoot;
 				_lootSpawnCounter = _lootSpawnCounter +1;
 				_lootSpawned = true;
-			};	
+			};
 			
 			//Next buildingpos
 			_bPosCounter = _bPosCounter +1;
@@ -76,7 +76,7 @@ _halfNumberOfHouses = (count _houseList) / 2;
 	else
 	{
 		diag_log format ["%1 is excluded as per exclusionList", _type];
-	};		
+	};
 	_lootSpawnTotalCounter = _lootSpawnTotalCounter + _lootSpawnCounter;
 	_houseCounter = _houseCounter +1;
 	if (_houseCounter == _halfNumberOfHouses) then {
@@ -85,7 +85,6 @@ _halfNumberOfHouses = (count _houseList) / 2;
 
 
 	//If this runs too fast, loot will spawn at [0,0,0]
-	if (_lootSpawned) then {sleep LOOTSPAWN_TICKRATE};	
 }foreach _houseList;
 
 diag_log format ["Loot spawning completed in %1 seconds. Spawned loot in %2 positions.", (serverTime - _startTime), _lootSpawnTotalCounter];
@@ -99,7 +98,7 @@ if (DEBUG_MODE) then {diag_log format ["Buggy loot spawns: %1", BUGGEDLOOTCOUNTE
 
 //Original and or modified, but trashed stuff below
 /*
-				
+
 {
 	_type = typeOf _x;
 	diag_log _type;
@@ -112,12 +111,12 @@ if (DEBUG_MODE) then {diag_log format ["Buggy loot spawns: %1", BUGGEDLOOTCOUNTE
 
 		//As long as the buildingpos exists, do:
 		while {((str _buildingPos) != "[0,0,0]")} do {
-			
+
 			if (LOOT_PROBABILITY > random 100) then {
 				diag_log format ["Loot spawning in %2 at %1", _buildingPos, (str _x)];
 				[_buildingPos] spawn mcd_fnc_spawnLoot;
-			};	
-			
+			};
+
 			//Next buildingpos
 			_bPosCounter = _bPosCounter +1;
 			_buildingPos = _x buildingPos _bPosCounter;
@@ -126,19 +125,19 @@ if (DEBUG_MODE) then {diag_log format ["Buggy loot spawns: %1", BUGGEDLOOTCOUNTE
 	else
 	{
 		diag_log "Is excluded.";
-	};		
+	};
 
-	sleep 0.5;	
+	sleep 0.5;
 }foreach _houseList;
 
 /*
 		for "_n" from 0 to 50 do {
-	 
+
 			_buildingPos = _x buildingpos _n;
 			if (str _buildingPos  ==  "[0,0,0]") exitwith {};
-						
+
 			if (LOOT_PROBABILITY > random 100) then {
 				diag_log format ["Loot spawning at %1", _buildingPos];
 				[_buildingPos] spawn mcd_fnc_spawnLoot;
-			};	
+			};
 		};
