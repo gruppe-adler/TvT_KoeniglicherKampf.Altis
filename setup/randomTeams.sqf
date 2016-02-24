@@ -24,7 +24,7 @@ private ["_players","_numberOfTeams", "_teammember", "_teamleadernames", "_teaml
 diag_log "Team randomizer starting...";
 
 _players = playableUnits;
-_numberOfTeams = floor ((count _players) / TEAM_SIZE);
+_numberOfTeams = ceil ((count _players) / TEAM_SIZE);
 TEAMLEADERS = [];
 _teamleadernames = [];
 
