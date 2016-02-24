@@ -31,24 +31,26 @@ if [[ ! -f $cpbo_path ]]; then
 fi
 
 
-head=`git reflog --decorate -1 --no-color`
+VERSION=$(git describe)
 
-# if possible, use current tag...
-#version=`echo $head | grep -o -E 'tag: \w+' | sed -e 's/tag: //'`
-version=`echo $head | sed -re 's/^.*tag: ([0-9a-z\.\-]+).*$/\1/'`
+echo "Repository Version: $VERSION"
 
-if [[ "$head" == "$version" ]]; then
-	# ...if not, use commit hash
-	#	version=`echo $head | grep --color=never -o -E '^[0-9a-f]+'`
-	version=`echo $head | sed -re 's/^([0-9a-f]+).*$/\1/g'`
+MAINVERSION=$(echo $VERSION | cut -d "-" -f1)
+COMMITSBEHIND=$(echo $VERSION | cut -d "-" -f2)
+SHORTHASH=$(echo $VERSION | cut -d "-" -f3)
+
+MAJOR=$(echo $MAINVERSION | cut -d "." -f1)
+MINOR=$(echo $MAINVERSION | cut -d "." -f2)
+BUGFIX=$COMMITSBEHIND
+
+VERSION="$MAJOR.$MINOR.$BUGFIX"
+
+if test "$MAINVERSION" = "$COMMITSBEHIND"
+then
+	VERSION="$MAJOR.$MINOR"
 fi
 
-echo "current version: $version"
-
-if [[ $version == "" ]]; then
-	echo "cant find tag OR commit hash. are you sure we're having a .git directory here?"
-	exit 2
-fi
+echo "Version-String: $VERSION"
 
 cwd=`pwd`
 
@@ -71,7 +73,7 @@ echo "building PBO...";
 $cpbo_path -y -p "$tmpdir" > /dev/null
 echo "done (probably)"
 
-pbofilename="${tmpdir}.pbo" 
+pbofilename="${tmpdir}.pbo"
 
 if [[ ! -f "$pbofilename" ]]; then
 	echo "örks"
@@ -80,7 +82,7 @@ fi
 
 echo "copying pbo for different islands..."
 for island in "${islands[@]}"; do
-	cp "$pbofilename" "${builddir}/${missionname}_${version}.${island}.pbo"
+	cp "$pbofilename" "${builddir}/${missionname}_${VERSION}.${island}.pbo"
 done
 
 echo "done. clean up..."
