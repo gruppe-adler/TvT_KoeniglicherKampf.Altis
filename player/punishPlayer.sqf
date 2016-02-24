@@ -73,19 +73,26 @@ else
 
 		if (side player != west) then {
 
-			if ((player distance2D OLDCENTER) > OLDSIZE) then {
+			if (!isNil "OLDCENTER") then {
 
-				if (time - _currentTime > _killTimeOutside) then {
-					player setDamage 1;
+				if ((player distance2D OLDCENTER) > OLDSIZE) then {
+
+					if (time - _currentTime > _killTimeOutside) then {
+						player setDamage 1;
+					};
+				} else {
+
+					if (time - _currentTime > TIME_KILL_UNCONSCIOUS) then {
+						player setDamage 1;
+					};
 				};
-			} else {
 
+			} else {
 				if (time - _currentTime > TIME_KILL_UNCONSCIOUS) then {
 					player setDamage 1;
 				};
 			};
 		};
-
 		sleep 5;
 	};
 };

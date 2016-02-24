@@ -14,6 +14,9 @@ _pos2 =	(_pos select 2);
 //Spawn invisible container ========================================================================================================================
 _BARREL = createVehicle ["Land_BarrelEmpty_F",[_pos0,_pos1,_pos2+0.1], [], 0, "can_Collide"];
 waitUntil {!isNull _BARREL};
+//wait until barrel falls
+sleep 0.8;
+
 _holder = createVehicle ["groundweaponholder",[_pos0,_pos1,(getposATL _BARREL select 2)], [], 0, "can_Collide"];
 deletevehicle _BARREL;
 
@@ -79,7 +82,7 @@ if (_type == 0) then {
 
 // Spawn Magazines
 if (_type == 1) then {
-	_weapon= selectRandom weaponsLoot;
+	_weapon= selectRandom allWeaponsLoot;
 	_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
 
 	if ((count _magazines) > 0) then {

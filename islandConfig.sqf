@@ -104,7 +104,7 @@ ISLAND_CONFIG = [
 	[2717,2475,0],									// island center
 	1000, 											// parachute spawnradius from center -> +500 = playareasize
 	200, 											// initial searchradius for blue circle (only if whole island)
-	[2000,1500,1000,600,400,200,100,50],			// circlesizes
+	[1500,1100,800,650,400,250,100,50],				// circlesizes
 	true,											// use whole island as play area?
 	0,												// play area search radius (only if not whole island)
 	'Porto'],										// name

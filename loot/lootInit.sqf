@@ -8,6 +8,10 @@ private ["_houseList", "_bPosCounter", "_type","_cleanUpCounter", "_lootSpawnCou
 //Load config and loot spawn function
 mcd_fnc_spawnLoot = compile preprocessFileLineNumbers "functions\fn_spawnLoot.sqf";
 call compile preprocessFileLineNumbers "loot\lootConfig.sqf";
+call compile preprocessFile "loot\carepackageConfig.sqf";
+allWeaponsLoot = weaponsLoot + CPWEAPONS; 
+
+
 sleep 2;
 
 //Read settings
@@ -78,66 +82,16 @@ _halfNumberOfHouses = (count _houseList) / 2;
 		diag_log format ["%1 is excluded as per exclusionList", _type];
 	};
 	_lootSpawnTotalCounter = _lootSpawnTotalCounter + _lootSpawnCounter;
+	
+	/* //deactivated, since loot spawning is fast now
 	_houseCounter = _houseCounter +1;
 	if (_houseCounter == _halfNumberOfHouses) then {
 		["Lootspawning halfway done.",0,0,2,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
 	};
-
+	*/
 
 	//If this runs too fast, loot will spawn at [0,0,0]
 }foreach _houseList;
 
 diag_log format ["Loot spawning completed in %1 seconds. Spawned loot in %2 positions.", (serverTime - _startTime), _lootSpawnTotalCounter];
 if (DEBUG_MODE) then {diag_log format ["Buggy loot spawns: %1", BUGGEDLOOTCOUNTER]};
-
-
-
-
-
-
-
-//Original and or modified, but trashed stuff below
-/*
-
-{
-	_type = typeOf _x;
-	diag_log _type;
-
-	if (!(_type in exclusionList)) then {
-		diag_log "Not excluded.";
-
-		//buildingpos ID 0
-		_buildingPos = _x buildingpos _bPosCounter;
-
-		//As long as the buildingpos exists, do:
-		while {((str _buildingPos) != "[0,0,0]")} do {
-
-			if (LOOT_PROBABILITY > random 100) then {
-				diag_log format ["Loot spawning in %2 at %1", _buildingPos, (str _x)];
-				[_buildingPos] spawn mcd_fnc_spawnLoot;
-			};
-
-			//Next buildingpos
-			_bPosCounter = _bPosCounter +1;
-			_buildingPos = _x buildingPos _bPosCounter;
-		};
-	}
-	else
-	{
-		diag_log "Is excluded.";
-	};
-
-	sleep 0.5;
-}foreach _houseList;
-
-/*
-		for "_n" from 0 to 50 do {
-
-			_buildingPos = _x buildingpos _n;
-			if (str _buildingPos  ==  "[0,0,0]") exitwith {};
-
-			if (LOOT_PROBABILITY > random 100) then {
-				diag_log format ["Loot spawning at %1", _buildingPos];
-				[_buildingPos] spawn mcd_fnc_spawnLoot;
-			};
-		};

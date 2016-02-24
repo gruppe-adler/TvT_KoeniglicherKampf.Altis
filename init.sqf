@@ -19,9 +19,11 @@ NUMBER_OF_FAST_CIRCLES = 5;					//the last x circles will spawn in the circle_in
 
 JUMP_HEIGHT = 1000;							//height the players are dropped from at round start
 LOOTSPAWN_TICKRATE = 0.18;					//the less the tickrate, the faster, but the more buggy loot
-CAREPACKAGE_INTERVAL = [150,360];			//carepackages spawn between select 0 and select 1 seconds after another
+CAREPACKAGE_INTERVAL = [300,540];			//carepackages spawn between select 0 and select 1 seconds after another
 CAREPACKAGE_DROPHEIGHT = 500;				//the z-coord ATL carepackages are spawned at
 CAREPACKAGE_LOOTAMOUNT = 6;					//how much loot spawns around a single carepackage
+
+CARMINDISTANCE = 100;
 
 //Read Islandconfig
 ISLAND_CENTER = (ISLAND_CONFIG select (ISLANDS find worldName)) select 1;

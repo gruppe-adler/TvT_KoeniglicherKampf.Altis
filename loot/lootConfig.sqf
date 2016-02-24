@@ -1,6 +1,7 @@
+
 //Distribution
 LOOT_DISTRIBUTION = [
-	11,	//dist_weapons
+	12,	//dist_weapons
 	10,	//dist_items 
 	13, //dist_clothes
 	10, //dist_vests 

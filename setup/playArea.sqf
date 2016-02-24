@@ -51,13 +51,13 @@ diag_log format ["Circlesizes are: %1", CIRCLESIZES];
 //whole island?
 if (ISLAND_USEWHOLE) then {
 	PLAYAREACENTER = ISLAND_CENTER;
-  ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 800;
-	diag_log "Using whole island as play area.";
-}
-else {
-
-  //ISLAND_PLAYAREASIZE = (CIRCLESIZES select 0) + 500;
   ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 500;
+	diag_log "Using whole island as play area.";
+  
+} else {
+
+  ISLAND_PLAYAREASIZE = (CIRCLESIZES select 0) + 700;
+  //ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 500;
 
   //if you use "find closest land" instead of this, center will be more likely to be near coast
  	_isWater = true;

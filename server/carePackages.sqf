@@ -31,7 +31,7 @@ Optional Parameters:
                             [...,heli]             Only vehicle object given
 */
 
-call compile preprocessFile "loot\carepackageConfig.sqf";
+//call compile preprocessFile "loot\carepackageConfig.sqf"; //moved to lootInit.sqf
 mcd_fnc_spawnCarepackage = compile preprocessFileLineNumbers "loot\spawnCarepackage.sqf";
 
 private ["_timeMin", "_timeMax", "_carepackagePos"];

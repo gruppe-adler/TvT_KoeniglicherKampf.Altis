@@ -56,27 +56,42 @@ _armedVehicles = [
 
 if (ARMED_VEHICLES) then {_vehicles = _vehicles + _armedVehicles};
 
-private ["_vehicleAmount","_min","_max", "_spawnpos", "_vehicle", "_spawnedVehicle", "_spawnFound"];
+private ["_vehicleAmount","_min","_max", "_spawnPos", "_vehicle", "_spawnedVehicle", "_spawnFound", "_spawnPositions", "_searchCounter", "_tooCloseFound"];
 _min = MINMAX_CARS select 0;
 _max = MINMAX_CARS select 1;
 _vehicleAmount = floor ((random _max) max _min)+1;
+_spawnPositions = [];
+_searchCounter = 0;
 
 diag_log format ["Spawning %1 vehicles.", _vehicleAmount];
 
 for [{_i = 0},{_i < _vehicleAmount},{_i = _i + 1}] do {
 	_vehicle = selectRandom _vehicles;
 
-  _spawnFound = false;
-  while {!_spawnFound} do {
-    _spawnpos = [PLAYAREACENTER, [0, ISLAND_PLAYAREASIZE], [0,360], 0, [2,400],_vehicle] call SHK_pos;
-    if ((count _spawnpos) != 0) then {_spawnFound = true} else {diag_log "Vehicle spawn - Road not found. Repeating."};
+  _tooCloseFound = true;
+  while {_tooCloseFound} do {
+
+    //find spawn position
+    _spawnFound = false;
+    while {!_spawnFound} do {
+      _spawnPos = [PLAYAREACENTER, [0, ISLAND_PLAYAREASIZE], [0,360], 0, [2,200],_vehicle] call SHK_pos;
+      if ((count _spawnPos) != 0) then {_spawnFound = true} else {diag_log "Vehicle spawn - Road not found. Repeating."};
+    };
+
+    //are there any other cars too close by?
+    _tooCloseFound = false;
+    {
+      if ((_x distance2D _spawnPos) < CARMINDISTANCE) exitWith {_tooCloseFound = true; diag_log "Vehicle spawn - too close to other vehicle."};
+    } forEach _spawnPositions;
+
   };
 
+  _spawnPositions pushBack _spawnPos;
 
-	_spawnedVehicle = _vehicle createVehicle _spawnpos;
+	_spawnedVehicle = _vehicle createVehicle _spawnPos;
 	_spawnedVehicle setDir (random 360);
 
-  diag_log format ["%1 spawned at %2", _vehicle, _spawnpos];
+  diag_log format ["%1 spawned at %2", _vehicle, _spawnPos];
 
 	if (DEBUG_MODE) then {
     _markername = format ["vehiclemarker_%1", _i];

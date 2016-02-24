@@ -10,7 +10,7 @@ class Header
 //======================================================================= LOAD SCREEN
 onLoadName = "Königlicher Kampf";
 onLoadMission = "Pls don't sue me.";
-author = "McDiod für Gruppe Adler";
+author = "McDiod und meat für Gruppe Adler";
 loadScreen = "pictures\logo.paa";
 
 
