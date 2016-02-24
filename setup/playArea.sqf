@@ -56,7 +56,7 @@ if (ISLAND_USEWHOLE) then {
   
 } else {
 
-  ISLAND_PLAYAREASIZE = (CIRCLESIZES select 0) + 700;
+  ISLAND_PLAYAREASIZE = (((ISLAND_CONFIG select (ISLANDS find worldName)) select 4) select 0) + 700;
   //ISLAND_PLAYAREASIZE = ISLAND_SPAWNSEARCHRADIUS + 500;
 
   //if you use "find closest land" instead of this, center will be more likely to be near coast
