@@ -131,8 +131,10 @@ if (hasInterface) then {
 	//Damage
 	player allowDamage false;
 	"GAMESTARTED" addPublicVariableEventHandler {
-		player allowDamage true;
-		diag_log "Player allowed damage";
+		if (GAMESTARTED) then {
+			player allowDamage true;
+			diag_log "Player allowed damage";
+		};
 	};
 
 	//Setup
