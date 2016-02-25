@@ -54,7 +54,13 @@ else
 {
 	//EH is non-scheduled, so this has to be spawned
 	updateVariables = {		
-		sleep TIME_UNTIL_GETIN;
+
+		if (FIRSTCIRCLE) then {
+			sleep TIME_UNTIL_GETIN_FIRST;
+		} else {
+			sleep TIME_UNTIL_GETIN;
+		};
+
 		OLDCENTER = NEWCIRCLEPOS;
 		OLDSIZE = NEWCIRCLESIZE;
 		diag_log format ["Updated circle variables on client - Pos: %1 Size: %2", OLDCENTER, OLDSIZE];

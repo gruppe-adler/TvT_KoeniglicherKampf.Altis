@@ -41,10 +41,7 @@ _vehicles = [
 "C_Quadbike_01_F",
 "C_Offroad_01_F",
 
-"RDS_Golf4_Civ_01",
 "RDS_Gaz24_Civ_01",
-"RDS_S1203_Civ_01",
-"RDS_Octavia_Civ_01",
 
 "RHS_UAZ_MSV_01"
 ];

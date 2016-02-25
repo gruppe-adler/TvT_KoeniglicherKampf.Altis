@@ -109,6 +109,9 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 		[_messagetext,0,0,4,1] remoteExec ["BIS_fnc_dynamicText",0,false];
 		sleep TIME_UNTIL_GETIN;
 
+		FIRSTCIRCLE = false;
+		publicVariable "FIRSTCIRCLE";
+
 		CIRCLESSTARTED = true;
 		publicVariable "CIRCLESSTARTED";
 	}

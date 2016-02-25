@@ -4,59 +4,40 @@
 */
 
 waitUntil {GAMESTARTED};
-private ["_group"];
+private ["_group", "_playersAlive", "_groupUnits"];
+mcd_fnc_endRound = compile preprocessFileLineNumbers "functions\fn_endRound.sqf";
 
 PLAYINGGROUPS = allGroups;
-
-
-
-//End mission function
-mcd_fnc_endRound = {
-	
-	sleep 5;
-
-	if ((count PLAYINGGROUPS) == 1) then {
-		_leader = leader (PLAYINGGROUPS select 0);
-		_message = format ["%1's group won!", (name _leader)];
-		[_message,0,0,4,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
-
-		sleep 7;
-		["Won"] call BIS_fnc_endMissionServer;
-	}
-	else {
-		if ((count PLAYINGGROUPS) == 0) then {
-			_message = "No one left alive! Game ending in a draw.";
-			[_message,0,0,4,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
-
-			sleep 7;
-			["Won"] call BIS_fnc_endMissionServer;
-		}
-		else {
-			diag_log format ["Tried ending the round, but there are still %1 groups left.", (count PLAYINGGROUPS)];
-			PLAYINGGROUPS = allGroups;
-		};
-	};
-
-};
-
-
 
 //Main
 while {true} do {
 	//Check what groups still have players
 	{
 		_group = _x;
-		if ((count units _group) <= 0) then {
+		_groupUnits = units _group;
+		
+		_playersAlive = false;
+		{
+			if (alive _x) then {
+				_playersAlive = true;
+			};
+		} forEach _groupUnits;
+
+
+		if (!_playersAlive) then {
 			PLAYINGGROUPS = PLAYINGGROUPS - [_group];
 			diag_log format ["No more players in group %1", _group];
 		};
+
 	} forEach PLAYINGGROUPS;
 
 	//Check if less than 2 groups have players
 	if ((count PLAYINGGROUPS) < 2) then {
-		diag_log "Less than 2 groups left. Ending the game.";
+		diag_log "Less than 2 groups left. Ending the game. winCondition.sqf halting.";
 		_endrndhndl = [] spawn mcd_fnc_endRound;
 		waitUntil {scriptDone _endrndhndl};
+
+		diag_log "winCondition.sqf resuming.";
 	};
 
 	sleep 5;

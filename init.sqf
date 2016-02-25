@@ -4,6 +4,7 @@ call compile preprocessFile "islandConfig.sqf";
 //Misc
 disableRemoteSensors true;
 CIRCLESSTARTED = false;
+FIRSTCIRCLE = true;
 
 //Settings ======================================================================================================================
 TIME_UNTIL_ROUND_START = 10;				//how long until the round starts after setup\startround.sqf is executed
