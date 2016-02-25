@@ -141,6 +141,9 @@ if (hasInterface) then {
 		};
 	};
 
+	waitUntil {!isNull player};
+	waitUntil {player == player};
+
 	//Setup
 	[] execVM "player\killJIP.sqf";
 	[] execVM "player\startPosition.sqf";

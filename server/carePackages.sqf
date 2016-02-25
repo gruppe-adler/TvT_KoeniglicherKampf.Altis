@@ -32,7 +32,7 @@ Optional Parameters:
 */
 
 //call compile preprocessFile "loot\carepackageConfig.sqf"; //moved to lootInit.sqf
-mcd_fnc_spawnCarepackage = compile preprocessFileLineNumbers "loot\spawnCarepackage.sqf";
+mcd_fnc_spawnCarepackage = compile preprocessFileLineNumbers "functions\fn_spawnCarepackage.sqf";
 
 private ["_timeMin", "_timeMax", "_carepackagePos"];
 

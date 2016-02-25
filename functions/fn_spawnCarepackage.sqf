@@ -28,7 +28,7 @@ _box attachTo [_chute, [0, 0, -0.5]];
 [_box, "BattlefieldJet2"] remoteExec ["say3D", 0, false];
 
 //Wait until box is on the ground // cant use isTouchingGround here as it is too inaccurate
-_oldHeight = (getPos _box) select 2;
+_oldPos = getPos _box;
 sleep 3;
 _inTheAir = true;
 while {_inTheAir} do {
@@ -40,8 +40,8 @@ while {_inTheAir} do {
 	};
 
 	//check if box is still falling
-	_newHeight = (getPos _box) select 2;
-	_fallSpeed = (_oldHeight - _newHeight);
+	_newPos = getPos _box;
+	_fallSpeed = _oldPos distance _newPos;
 
 	if (_fallSpeed < 0.2) then {
 		diag_log format ["Carepackage has stopped falling. Fall speed was %1 m/s.", _fallSpeed];
@@ -59,7 +59,7 @@ while {_inTheAir} do {
 		_inTheAir = false;
 	};
 
-	_oldHeight = _newHeight;
+	_oldPos = _newPos;
 };
 
 //Spawn loot
@@ -100,6 +100,8 @@ for "_i" from 0 to CAREPACKAGE_LOOTAMOUNT do {
 			_holder addWeaponCargoGlobal [_weapon, 1];
 			_holder addItemCargoGlobal [_scope, 1];
 			_holder addMagazineCargoGlobal [_magazineClass, (floor random 4) max 1];
+
+			diag_log format ["Added sniper %1 with scope %2 to carepackage loot.", _weapon, _scope];
 		};
 	};
 
