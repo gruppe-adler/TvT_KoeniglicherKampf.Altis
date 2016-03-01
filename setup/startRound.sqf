@@ -1,17 +1,41 @@
 diag_log "Round setup starting...";
 
-private ["_teamleadpos", "_parachuteposition", "_positions", "_unit"];
+private ["_teamleadpos", "_parachuteposition", "_positions", "_unit", "_tooCloseFound", "_repetitions"];
 
 {
+	diag_log format ["Finding position for %1's team.", (name _x)];
 	PARACHUTEPOSITIONS = [];
 
-	//find position
-	_isWater = true;
-	while {_isWater} do {
-		_teamleadpos = [PLAYAREACENTER, [0, ISLAND_SPAWNSEARCHRADIUS], [0,360], 1] call SHK_pos;
-		_isWater = surfaceIsWater _teamleadpos;
+	//Position for teamleader
+	_repetitions = 0;
+	_tooCloseFound = true;
+	while {_tooCloseFound} do {
+
+		//find position that is not over water
+		_isWater = true;
+		while {_isWater} do {
+			_teamleadpos = [PLAYAREACENTER, [0, ISLAND_SPAWNSEARCHRADIUS], [0,360], 1] call SHK_pos;
+			_isWater = surfaceIsWater _teamleadpos;
+		};
+		_teamleadpos = _teamleadpos vectorAdd [0,0,JUMP_HEIGHT];
+
+		//make sure position is at least STARTPOSMINDIST away from other positions
+		_tooCloseFound = false;
+		{
+			if ((_x distance2D _teamleadpos) < STARTPOSMINDIST) exitWith {_tooCloseFound = true; diag_log "Parachute position to close to other position. Repeating."};
+		} forEach PARACHUTEPOSITIONS;
+
+		//unless this has been repeated too often -> use position anyway
+		if (_repetitions >= 10) then {
+			_tooCloseFound = false;
+		};
+
+		_repetitions = _repetitions +1;
 	};
-	_teamleadpos = _teamleadpos vectorAdd [0,0,JUMP_HEIGHT];
+
+	//this is only used for distance calculations (?)
+	PARACHUTEPOSITIONS pushBack _teamleadpos;
+
 
 	//in debug mode, add marker
 	if (DEBUG_MODE) then {
@@ -40,7 +64,6 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit"];
 	_x setVariable ["POSITION", PARACHUTEPOSITIONS, false];
 	diag_log format ["Positions for %1's team: %2", name _x, _x getVariable "POSITIONS"];
 	*/
-
 
 } forEach TEAMLEADERS;
 

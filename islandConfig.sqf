@@ -39,6 +39,7 @@ ISLANDS = [
 	'Porto',
 	'Sara_dbe1',
 	'Stratis',
+	'SugarLake',
 	'Takistan',
 	'utes',
 	'Zargabad'
@@ -59,7 +60,7 @@ ISLAND_CONFIG = [
 	[6982,8788,0],									// island center
 	3000, 											// parachute spawnradius from center -> +500 = playareasize
 	1000, 											// initial searchradius for blue circle (only if whole island)
-	[3100,2800,1500,1100,800,600,400,200,100,50],	// circlesizes
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
 	false,											// use whole island as play area?
 	3500,											// play area search radius (only if not whole island)
 	'Chernarus'],									// name
@@ -68,7 +69,7 @@ ISLAND_CONFIG = [
 	[6357,6669,0],									// island center
 	3000, 											// parachute spawnradius from center -> +500 = playareasize
 	1000, 											// initial searchradius for blue circle (only if whole island)
-	[3100,2800,1500,1100,800,600,400,200,100,50],	// circlesizes
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
 	false,											// use whole island as play area?
 	4000,											// play area search radius (only if not whole island)
 	'Esseker'],										// name
@@ -113,7 +114,7 @@ ISLAND_CONFIG = [
 	[12376,11521,0],								// island center
 	3000, 											// parachute spawnradius from center -> +500 = playareasize
 	1000, 											// initial searchradius for blue circle (only if whole island)
-	[2000,1500,1000,600,400,200,100,50],			// circlesizes
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
 	false,											// use whole island as play area?
 	7000,											// play area search radius (only if not whole island)
 	'Sahrani'],										// name
@@ -127,11 +128,20 @@ ISLAND_CONFIG = [
 	0,												// play area search radius (only if not whole island)
 	'Stratis'],										// name
 
+	[[6451,7666,0],									// initial startposition
+	[4155,4414,0],									// island center
+	3000, 											// parachute spawnradius from center -> +500 = playareasize
+	800, 											// initial searchradius for blue circle (only if whole island)
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
+	true,											// use whole island as play area?
+	7000,											// play area search radius (only if not whole island)
+	'SugarLake'],									// name
+
 	[[5646,11401,0],								// initial startposition
 	[6768,6844,0],									// island center
 	3000, 											// parachute spawnradius from center -> +500 = playareasize
 	1000, 											// initial searchradius for blue circle (only if whole island)
-	[2000,1500,1000,600,400,200,100,50],			// circlesizes
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
 	false,											// use whole island as play area?
 	3000,											// play area search radius (only if not whole island)
 	'Takistan'],									// name

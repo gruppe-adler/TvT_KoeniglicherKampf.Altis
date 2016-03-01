@@ -64,7 +64,7 @@ if (ISLAND_USEWHOLE) then {
 	_towns = true;
 	while {_isWater || _towns} do {
 		PLAYAREACENTER = [ISLAND_CENTER, [0,ISLAND_PLAYAREASEARCHRADIUS], [0,360], 1] call SHK_pos;
-		_isWater = surfaceIsWater PLAYAREACENTER;
+    _isWater = surfaceIsWater PLAYAREACENTER;
 		_townsnum  = count nearestLocations [PLAYAREACENTER, ["NameVillage", "NameCity", "NameCityCapital"], ISLAND_PLAYAREASIZE];
 
 		if (_townsnum >= 2) then {

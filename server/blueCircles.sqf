@@ -59,7 +59,7 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 	else
 	{
 		//Calculate searchradius for new circle center
-		_searchRadius = (_circleSizes select (_i - 1)) - (_circleSizes select _i);
+		_searchRadius = ((_circleSizes select (_i - 1)) - (_circleSizes select _i)) * CIRCLE_MOVEFACTOR;
 		_firstCircle = false;
 	};
 

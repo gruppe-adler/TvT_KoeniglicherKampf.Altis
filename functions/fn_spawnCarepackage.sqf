@@ -88,7 +88,7 @@ for "_i" from 0 to CAREPACKAGE_LOOTAMOUNT do {
 			_magazineClass = selectRandom _magazines; 
 
 			_holder addWeaponCargoGlobal [_weapon, 1];
-			_holder addMagazineCargoGlobal [_magazineClass, (floor random 4) max 1];
+			_holder addMagazineCargoGlobal [_magazineClass, (floor random 5) max 2];
 
 		//Sniper
 		} else {		
@@ -99,7 +99,7 @@ for "_i" from 0 to CAREPACKAGE_LOOTAMOUNT do {
 
 			_holder addWeaponCargoGlobal [_weapon, 1];
 			_holder addItemCargoGlobal [_scope, 1];
-			_holder addMagazineCargoGlobal [_magazineClass, (floor random 4) max 1];
+			_holder addMagazineCargoGlobal [_magazineClass, (floor random 5) max 2];
 
 			diag_log format ["Added sniper %1 with scope %2 to carepackage loot.", _weapon, _scope];
 		};

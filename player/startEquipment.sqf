@@ -16,7 +16,15 @@ _vanillaUniforms = [
 
 _randomUniform = selectRandom _vanillaUniforms;
 */
-_randomUniform = selectRandom ["U_C_Scientist"];
+//_randomUniform = selectRandom ["U_C_Scientist"];
+
+waitUntil {!isNull player};
+waitUntil {player == player};
+
+
+_randomUniform = "rhs_uniform_df15";
+
+
 
 //Add equipment
 comment "Exported from Arsenal by McDiod";
@@ -32,7 +40,6 @@ removeHeadgear player;
 removeGoggles player;
 
 comment "Add containers";
-//player forceAddUniform _randomUniform;
 player forceAddUniform _randomUniform;
 for "_i" from 1 to 4 do {player addItemToUniform "ACE_fieldDressing";};
 for "_i" from 1 to 2 do {player addItemToUniform "ACE_morphine";};

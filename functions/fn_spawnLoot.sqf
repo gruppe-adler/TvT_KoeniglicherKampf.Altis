@@ -73,7 +73,7 @@ if (_type == 0) then {
 		_magazineClass = selectRandom _magazines;
 
 		_holder addWeaponCargoGlobal [_loot, 1];
-		_holder addMagazineCargoGlobal [_magazineClass, ((floor random 3.99) max 1)];
+		_holder addMagazineCargoGlobal [_magazineClass, ((floor random 4.50) max 2)];
 	} else {
 		diag_log format ["Could not find magazines for weapon %1", _loot];
 	};
