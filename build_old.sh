@@ -14,6 +14,7 @@ islands=(
 	Porto
 	Sara_dbe1
 	Stratis
+	SugarLake
 	Takistan
 	utes
 	Zargabad
