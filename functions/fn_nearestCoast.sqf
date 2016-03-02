@@ -16,7 +16,7 @@
 */
 
 params [["_startPos", [0,0,0]], ["_maxDist", 2000], ["_minDepth", 5], ["_angleStep", 10], ["_distStep", 20]];
-private ["_searchDist", "_coastFound", "_newPos", "_newPosIsWater", "_coastFound"];
+private ["_searchDist", "_coastFound", "_newPos", "_newPosIsWater"];
 
 _coastFound = false;
 _startPosIsWater = surfaceIsWater _startPos;
