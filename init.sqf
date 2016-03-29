@@ -41,7 +41,7 @@ ISLAND_PLAYAREASEARCHRADIUS = (ISLAND_CONFIG select (ISLANDS find worldName)) se
 DEBUG_MODE = (paramsArray select 0) == 1;
 RANDOM_TEAMS = (paramsArray select 1) == 1;
 TEAM_SIZE = paramsArray select 2;
-CIRCLE_INTERVAL = paramsArray select 3;					
+CIRCLE_INTERVAL = paramsArray select 3;
 //GAME_TIME = paramsArray select 3;
 SCOPES_ALLOWED = (paramsArray select 4) == 1;
 WEATHER_SETTING = paramsArray select 5;
@@ -53,30 +53,41 @@ ARMED_VEHICLES = (paramsArray select 9) == 1;
 switch (CAR_AMOUNT) do {
 	case 0: {MINMAX_CARS = [6,15]};
 	case 1: {MINMAX_CARS = [10,25]};
-	case 2: {MINMAX_CARS = [15,35]};	
+	case 2: {MINMAX_CARS = [15,35]};
 };
 
+setViewDistance 3500;
 
-
-//Weather =======================================================================================================================
 setCustomWeather = {
-	// skipTime -24; 
-	0 setOvercast (_this select 0); 
-	setViewDistance 6000;
+	// skipTime -24;
+	10 setOvercast (_this select 0);
+	10 setRain 0;
+	if ((_this select 0) > 0.5) then {
+		_fogDensity = 0.2;
+		_fogFalloff = 0;
+		10 setFog [_fogDensity, _fogFalloff, 0];
+	};
+	if (_this select 1 && (_this select 0) > 0.7) then {
+		10 setRain 1;
+		_fogDensity = 0.4;
+		_fogFalloff = 0;
+		10 setFog [_fogDensity, _fogFalloff, 1];
+	};
+
+	forceWeatherChange;
 	// skipTime 24;
 };
 
-switch (WEATHER_SETTING) do {
-	case 0: {[0] call setCustomWeather;};
-	case 1: {[0.4] call setCustomWeather;};
-	case 2: {[1] call setCustomWeather;};
-	case 3: {[random 1] call setCustomWeather;};
-	default {[0] call setCustomWeather;};
-};
-
-
 //SERVER ONLY ===================================================================================================================
 if (isServer) then {
+
+	switch (WEATHER_SETTING) do {
+		case 0: {[0,false] call setCustomWeather;};
+		case 1: {[0.65,false] call setCustomWeather;};
+		case 2: {[1,true] call setCustomWeather;};
+		case 3: {[random 1,true] call setCustomWeather;};
+		default {[0,false] call setCustomWeather;};
+  };
 
 	// set to full moon date
 	if (TIME_OF_DAY == 1000) then {
@@ -95,7 +106,7 @@ if (isServer) then {
 	if (isClass (configFile >> "CfgPatches" >> "task_force_radio")) then {
 		[] execVM "tfarsettings.sqf";
 	};
-	
+
 	//Setup
 	_areahndl = [] execVM "setup\playArea.sqf";
 	waitUntil {scriptDone _areahndl};

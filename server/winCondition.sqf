@@ -15,7 +15,7 @@ while {true} do {
 	{
 		_group = _x;
 		_groupUnits = units _group;
-		
+
 		_playersAlive = false;
 		{
 			if (alive _x) then {
