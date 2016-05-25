@@ -13,6 +13,13 @@ if (!(RANDOM_TEAMS) || ((count playableUnits) == 1)) then {
 		TEAMLEADERS = TEAMLEADERS + [_groupleader];
 	} forEach allGroups;
 };
+
+//set kill EHs
+{
+	[_x] call mcd_fnc_addKilledEH;
+} forEach playableUnits;
+
+
 if !(isNil "TEAMLEADERS") exitWith{diag_log "Random teams are off."};
 
 //==================================================================== Start of randomization
@@ -28,7 +35,7 @@ _numberOfTeams = ceil ((count _players) / TEAM_SIZE);
 TEAMLEADERS = [];
 _teamleadernames = [];
 
-//Delete existing groups 
+//Delete existing groups
 {
 	[_x] joinSilent grpNull;
 } forEach _players;
@@ -47,7 +54,7 @@ else
 
 //Select teamleaders
 for [{_i = 0},{_i < _numberOfTeams},{_i = _i + 1}] do {
-	_teamlead = selectRandom _players; 
+	_teamlead = selectRandom _players;
 	_players = _players - [_teamlead];
 	TEAMLEADERS = TEAMLEADERS + [_teamlead];
 };
@@ -70,7 +77,7 @@ for [{_i = 0},{_i < (TEAM_SIZE - 1)}, {_i = _i + 1}] do {
 		{
 			_teammember = selectRandom _players;
 			_players = _players - [_teammember];
-			[_teammember] joinSilent _x; 
+			[_teammember] joinSilent _x;
 			diag_log format ["%1 added to %2's team.", (name _teammember), (_teamleadernames select _teamleadID)];
 		};
 
@@ -78,4 +85,3 @@ for [{_i = 0},{_i < (TEAM_SIZE - 1)}, {_i = _i + 1}] do {
 
 	} forEach TEAMLEADERS;
 };
-

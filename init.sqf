@@ -44,7 +44,7 @@ TEAM_SIZE = paramsArray select 2;
 CIRCLE_INTERVAL = paramsArray select 3;
 //GAME_TIME = paramsArray select 3;
 SCOPES_ALLOWED = (paramsArray select 4) == 1;
-WEATHER_SETTING = paramsArray select 5;
+WEATHER_SETTING = "WeatherSetting" call BIS_fnc_getParamValue;
 TIME_OF_DAY = paramsArray select 6;
 LOOT_PROBABILITY = paramsArray select 7;
 CAR_AMOUNT = paramsArray select 8;
@@ -58,36 +58,11 @@ switch (CAR_AMOUNT) do {
 
 setViewDistance 3500;
 
-setCustomWeather = {
-	// skipTime -24;
-	10 setOvercast (_this select 0);
-	10 setRain 0;
-	if ((_this select 0) > 0.5) then {
-		_fogDensity = 0.2;
-		_fogFalloff = 0;
-		10 setFog [_fogDensity, _fogFalloff, 0];
-	};
-	if (_this select 1 && (_this select 0) > 0.7) then {
-		10 setRain 1;
-		_fogDensity = 0.4;
-		_fogFalloff = 0;
-		10 setFog [_fogDensity, _fogFalloff, 1];
-	};
-
-	forceWeatherChange;
-	// skipTime 24;
-};
-
 //SERVER ONLY ===================================================================================================================
 if (isServer) then {
 
-	switch (WEATHER_SETTING) do {
-		case 0: {[0,false] call setCustomWeather;};
-		case 1: {[0.65,false] call setCustomWeather;};
-		case 2: {[1,true] call setCustomWeather;};
-		case 3: {[random 1,true] call setCustomWeather;};
-		default {[0,false] call setCustomWeather;};
-  };
+  mcd_fnc_addKilledEH = compile preprocessFileLineNumbers "functions\fn_addKilledEH.sqf";
+	mcd_fnc_killMessage = compile preprocessFileLineNumbers "functions\fn_killMessage.sqf";
 
 	// set to full moon date
 	if (TIME_OF_DAY == 1000) then {
@@ -108,6 +83,7 @@ if (isServer) then {
 	};
 
 	//Setup
+	[] execVM "server\setWeather.sqf";
 	_areahndl = [] execVM "setup\playArea.sqf";
 	waitUntil {scriptDone _areahndl};
 
@@ -168,7 +144,6 @@ if (hasInterface) then {
 	[] execVM "player\startEquipment.sqf";
 	[] execVM "player\punishPlayer.sqf";
 	[] execVM "player\briefing.sqf";
-	[] execVM "player\killMessages.sqf";
 
 	//Intro
 	if (!didJIP) then {

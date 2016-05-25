@@ -1837,7 +1837,7 @@ class Mission
 						};
 						class Item1
 						{
-							value="0";
+							value="1";
 							parentCls="ace_advanced_ballistics_ModuleSettings";
 							typeName="simulateForSnipers";
 						};
@@ -1953,7 +1953,7 @@ class Mission
 						items=6;
 						class Item0
 						{
-							value="1";
+							value="0";
 							parentCls="ace_weather_ModuleSettings";
 							typeName="enableServerController";
 						};
@@ -2315,13 +2315,13 @@ class Mission
 						items=4;
 						class Item0
 						{
-							value="1";
+							value="0";
 							parentCls="ace_winddeflection_ModuleSettings";
 							typeName="enabled";
 						};
 						class Item1
 						{
-							value="1";
+							value="0";
 							parentCls="ace_winddeflection_ModuleSettings";
 							typeName="vehicleEnabled";
 						};

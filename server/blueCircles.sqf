@@ -3,7 +3,7 @@
 * Executed after round start via init.sqf on server
 */
 
-private ["_firstOfTheLast","_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext"];
+private ["_firstOfTheLast","_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext","_oldMarker"];
 
 
 _circleSizes = (ISLAND_CONFIG select (ISLANDS find worldName)) select 4;
@@ -45,7 +45,6 @@ diag_log format ["Initial Radius: %1", _initialRadius];
 diag_log format ["Circle Interval: %1", _circleInterval];
 
 
-
 //Main loop
 for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 
@@ -66,15 +65,18 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 	//Search for new circle center
 	diag_log format ["New circle center search radius: %1", _searchradius];
 	diag_log format ["Searching for new circle center."];
-	
+
 	NEWCIRCLEPOS = [NEWCIRCLEPOS, [0,_searchradius], [0,360]] call SHK_pos;
 	diag_log format ["New circle center found at %1", NEWCIRCLEPOS];
 
-	//Is it the first circle?
+	//Convert old marker to black
 	if (!_firstCircle) then {
-		if (!DEBUG_MODE) then {
-			deleteMarker _marker;
+		if (_i > 1) then {
+			deleteMarker _oldMarker;
 		};
+		_oldMarker = _marker;
+		_oldMarker setMarkerColor "ColorBlack";
+		_oldMarker setMarkerAlpha 0.7;
 	};
 
 	//Add Marker
@@ -115,9 +117,9 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 		CIRCLESSTARTED = true;
 		publicVariable "CIRCLESSTARTED";
 	}
-	else 
+	else
 	{
-		sleep 10; 
+		sleep 10;
 		_messagetext = format ["In %1 minutes, play will be limited to the area inside blue circle!", (TIME_UNTIL_GETIN / 60)];
 		[_messagetext,0,0,4,1] remoteExec ["BIS_fnc_dynamicText",0,false];
 
