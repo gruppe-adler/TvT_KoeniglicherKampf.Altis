@@ -53,7 +53,7 @@ if (isServer) then {
 else
 {
 	//EH is non-scheduled, so this has to be spawned
-	updateVariables = {		
+	updateVariables = {
 
 		if (FIRSTCIRCLE) then {
 			sleep TIME_UNTIL_GETIN_FIRST;
@@ -70,8 +70,7 @@ else
 	"NEWCIRCLEPOS" addPublicVariableEventHandler {[] spawn updateVariables};
 };
 
-//Kill player if he is unconcious for too long =====================================================================================================
-[] spawn {
+/*[] spawn {
 	_currentTime = time;
 	_killTimeOutside = TIME_KILL_UNCONSCIOUS / 4;
 
@@ -101,7 +100,7 @@ else
 		};
 		sleep 5;
 	};
-};
+};*/
 
 //Main loop ========================================================================================================================================
 
