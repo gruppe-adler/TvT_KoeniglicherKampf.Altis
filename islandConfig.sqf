@@ -34,8 +34,10 @@ ISLANDS = [
 	'Chernarus',
 	'Esseker',
 	'fata',
+	'IslaDuala3',
 	'Kunduz',
 	'namalsk',
+	'Panthera3',
 	'Porto',
 	'Sara_dbe1',
 	'Stratis',
@@ -83,6 +85,15 @@ ISLAND_CONFIG = [
 	0,												// play area search radius (only if not whole island)
 	'Fata'],										// name
 
+	[[8624.87,4653.63,0],								// initial startposition
+	[5295.73,5333.38,0],								// island center
+	3000, 											// parachute spawnradius from center -> +500 = playareasize
+	1000, 											// initial searchradius for blue circle (only if whole island)
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
+	false,											// use whole island as play area?
+	2000,											// play area search radius (only if not whole island)
+	'Isla Duala'],										// name
+
 	[[6450,2305,0],									// initial startposition
 	[2819,2716,0],									// island center
 	2500, 											// parachute spawnradius from center -> +500 = playareasize
@@ -100,6 +111,15 @@ ISLAND_CONFIG = [
 	true,											// use whole island as play area?
 	0,												// play area search radius (only if not whole island)
 	'Namalsk'],										// name
+
+	[[648.445,9271.38,0],								// initial startposition
+	[5280.98,4852.43,0],								// island center
+	3000, 											// parachute spawnradius from center -> +500 = playareasize
+	1000, 											// initial searchradius for blue circle (only if whole island)
+	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
+	false,											// use whole island as play area?
+	1500,											// play area search radius (only if not whole island)
+	'Panthera'],										// name
 
 	[[1274,631,0],									// initial startposition
 	[2717,2475,0],									// island center

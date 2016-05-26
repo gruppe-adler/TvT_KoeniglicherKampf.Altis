@@ -7,10 +7,11 @@ missionname="TvT_KoeniglicherKampf"
 islands=(
 	Altis
 	Chernarus
-	Esseker
 	fata
+	IslaDuala3
 	Kunduz
 	namalsk
+	Panthera3
 	Porto
 	Sara_dbe1
 	Stratis

@@ -7,10 +7,11 @@ missionname="TvT_KoeniglicherKampf"
 islands=(
 	Altis
 	Chernarus
-	Esseker
 	fata
+	IslaDuala3
 	Kunduz
 	namalsk
+	Panthera3
 	Porto
 	Sara_dbe1
 	Stratis
@@ -72,7 +73,7 @@ echo "building PBO...";
 $cpbo_path -y -p "$tmpdir" > /dev/null
 echo "done (probably)"
 
-pbofilename="${tmpdir}.pbo" 
+pbofilename="${tmpdir}.pbo"
 
 if [[ ! -f "$pbofilename" ]]; then
 	echo "örks"
