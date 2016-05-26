@@ -28,7 +28,8 @@ CPSNIPERS = [
 	"rhs_weap_svdp_npz",
 	"rhs_weap_svds_npz",
 	"rhs_weap_XM2010_d",
-	"rhs_weap_XM2010_wd"
+	"rhs_weap_XM2010_wd",
+	"rhs_weap_M107"
 ];
 
 CPSCOPES = [

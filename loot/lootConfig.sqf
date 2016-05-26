@@ -2,12 +2,12 @@
 //Distribution
 LOOT_DISTRIBUTION = [
 	15,	//dist_weapons
-	10,	//dist_items 
+	10,	//dist_items
 	16, //dist_clothes
-	10, //dist_vests 
+	10, //dist_vests
 	10, //dist_backpacks
 	12, //dist_medical
-	8, 	//dist_grenades 
+	8, 	//dist_grenades
 	8,	//dist_accessories
 	9,	//dist_sights
 	6 	//dist_scopes
@@ -55,6 +55,21 @@ weaponsLoot = 	[
 	"rhs_weap_m16a4_carryhandle_M203",
 	"rhs_weap_M590_5RD",
 	"rhs_weap_M590_8RD",
+	"rhs_weap_m38",
+	"rhs_weap_hk416d10",
+	"rhs_weap_hk416d145",
+	"rhs_weap_kar98k",
+	"rhs_weap_m21a",
+	"rhs_weap_m21s",
+	"rhs_weap_m70ab2",
+	"rhs_weap_m70b1",
+	"rhs_weap_m76",
+	"rhs_weap_m92",
+	"rhs_weap_m4a1_blockII",
+	"rhs_weap_sr25",
+	"rhs_weap_mk18",
+	"rhsusf_weap_MP7A1_base_f",
+	"rhs_weap_pp2000",
 
 	"SMA_ACR",
 	"SMA_ACRblk",
@@ -63,7 +78,6 @@ weaponsLoot = 	[
 	"SMA_HK416afg",
 	"SMA_HK416GL",
 	"SMA_HK416CUSTOMafgB",
-
 
 
 	"hgun_P07_snds_F",
@@ -391,6 +405,10 @@ sightsLoot = [
 	"rhs_acc_ekp1",
 	"rhs_acc_1p78",
 	"rhs_acc_1pn93_2",
+	"rhs_acc_rakursPM",
+	"rhsusf_acc_compm4",
+	"rhsusf_acc_eotech_552",
+
 	"optic_Aco_smg",
 	"optic_ACO_grn_smg",
 	"optic_Holosight_smg",
@@ -398,8 +416,7 @@ sightsLoot = [
 	"optic_Aco",
 	"optic_ACO_grn",
 	"optic_Holosight",
-	"rhsusf_acc_compm4",
-	"rhsusf_acc_eotech_552",
+
 	"FHQ_optic_AIM",
 	"FHQ_optic_AIM_tan",
 	"FHQ_optic_HWS_G33",
