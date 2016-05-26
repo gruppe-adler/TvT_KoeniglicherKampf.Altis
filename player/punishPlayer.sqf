@@ -70,6 +70,7 @@ else
 	"NEWCIRCLEPOS" addPublicVariableEventHandler {[] spawn updateVariables};
 };
 
+//Kill player if he is unsconcious for too long ===================================================================================================== DEACTIVATED - MIGHT BE RESPONSIBLE FOR RANDOM DEATHS
 /*[] spawn {
 	_currentTime = time;
 	_killTimeOutside = TIME_KILL_UNCONSCIOUS / 4;
