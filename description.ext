@@ -6,141 +6,22 @@ class Header
   maxPlayers = 150;
 };
 
-
 //======================================================================= LOAD SCREEN
 onLoadName = "Königlicher Kampf";
 onLoadMission = "Pls don't sue me.";
 author = "McDiod und meat für Gruppe Adler";
-loadScreen = "pictures\logo.paa";
+loadScreen = "data\logo.paa";
 
 
 //======================================================================= MISC
 enableDebugConsole = 1;
 respawnDelay = 9999999;
-
-//======================================================================= PARAMETERS
-class Params
-{
-	class debugmode
-	{
-		title = "Debug Mode";
-		values[] = {true, false};
-		texts[] = {"On", "Off"};
-		default = false;
-	};
-
-	class randomteams
-	{
-		title = "Random Teams";
-		values[] = {true, false};
-		texts[] = {"On", "Off"};
-		default = true;
-	};
-
-	class teamsize
-	{
-		title = "Random Teams - Size";
-		values[] = {1,2,3,4,5};
-		texts[] = {"1","2","3","4","5"};
-		default = 2;
-	};
-
-	class gametime
-	{
-		title = "Game Pace";
-		values[] = {200,300,400};
-		texts[] = {"Fast", "Normal", "Slow"};
-		default = 300;
-	};
-
-	class scopes
-	{
-		title = "High Powered Scopes";
-		values[] = {true, false};
-		texts[] = {"Normal", "Rare"};
-		default = false;
-	};
-
-	class WeatherSetting
-    {
-		title = "Weather";
-		values[] = {0,1,2,3};
-		texts[] = {"Sunny Day","Rainy Day","Cloudy Day","Random"};
-		default = 3;
-    };
-
-	class TimeOfDay
-	{
-		title = "Time of Day";
-		values[] = {6.5,7,8,9,10,11,12,13,14,15,16,17,1000};
-		texts[] = {"06:30", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "Random"};
-		default = 1000;
-	};
-
-	class lootamount
-	{
-		title = "Loot";
-		values[] = {40,65,80};
-		texts[] = {"Low", "Normal", "High"};
-		default = 65;
-	};
-
-	class vehicleamount
-	{
-		title = "Amount of Vehicles";
-		values[] = {0,1,2};
-		texts[] = {"Low", "Normal", "High"};
-		default = 1;
-	};	
-
-	class armedvehicles
-	{
-		title = "Armed Vehicles";
-		values[] = {true, false};
-		texts[] = {"On", "Off"};
-		default = false;
-	};	
-};
-
-
-//======================================================================= 
-class CfgRemoteExec
-{        
-       // List of script functions allowed to be sent from client via remoteExec
-       class Functions
-       {
-               // State of remoteExec: 0-turned off, 1-turned on, taking whitelist into account, 2-turned on, however, ignoring whitelists (default because of backward compatibility)
-               mode = 2;
-               // Ability to send jip messages: 0-disabled, 1-enabled (default)
-               jip = 1;
-
-       };        
-       // List of script commands allowed to be sent from client via remoteExec
-       class Commands
-       {
-              /*your commands here*/
-              class execVM { allowedTargets=0;} // can target anyone, sending jip is turned off (overrides settings in the Commands class)
-	};
-};
+allowFunctionsRecompile = 1;
 
 //======================================================================
+#include "cfgParams.hpp"
+#include "cfgACE.hpp"
 
-class ACE_Settings {
-   	class ace_map_BFT_Interval {
-	    value = 1;
-	    typeName = "SCALAR";
-	    force = 1;
-	};
-
-	class ace_map_BFT_Enabled {
-	    value = 0;
-	    typeName = "BOOL";
-	    force = 1;
-	};
-
-	class ace_map_BFT_HideAiGroups {
-	    value = 0;
-	    typeName = "BOOL";
-	    force = 1;
-	};
+class CfgFunctions {
+    #include "functions\cfgFunctions.hpp"
 };

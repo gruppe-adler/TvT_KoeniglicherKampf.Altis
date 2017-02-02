@@ -3,6 +3,8 @@
 * Executed after round start via init.sqf on server
 */
 
+if (!isServer) exitWith {};
+
 private ["_firstOfTheLast","_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext","_oldMarker"];
 
 

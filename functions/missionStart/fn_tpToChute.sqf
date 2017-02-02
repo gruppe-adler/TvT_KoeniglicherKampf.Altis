@@ -3,7 +3,7 @@
 * executed via startRound.sqf remoteExec
 */
 
-if (!hasInterface) exitWith{};
+if (!hasInterface) exitWith {};
 
 0 cutText ["", "BLACK FADED", 3, true];
 sleep 2;

@@ -3,6 +3,8 @@
 * executed via init.sqf on server
 */
 
+if (!isServer) exitWith {};
+
 private ["_swFrequencies", "_freq", "_alreadyIn", "_freqString", "_teamlead"];
 _swFrequencies = [];
 
@@ -54,4 +56,6 @@ for "_i" from 0 to count TEAMLEADERS -1 do {
 sleep 2;
 
 //Make players set their frequency
-[[], "player\setSWfreq.sqf"] remoteExec ["execVM",0,false];
+[] remoteExec ["koka_fnc_setSWfreq",0,false];
+
+missionNamespace getVariable ["koka_init_generateSWfreqDone",true,true];

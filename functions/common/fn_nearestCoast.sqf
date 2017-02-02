@@ -12,7 +12,7 @@
 *		[0,0,0] if no coast found within search distance
 *
 *	Example:
-*		[position player, 5000, 5] call mcd_fnc_nearestCoast
+*		[position player, 5000, 5] call koka_fnc_nearestCoast
 */
 
 params [["_startPos", [0,0,0]], ["_maxDist", 2000], ["_minDepth", 5], ["_angleStep", 10], ["_distStep", 20]];

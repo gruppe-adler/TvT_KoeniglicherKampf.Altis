@@ -4,10 +4,9 @@
 * Player takes damage on every second tick
 */
 
-waitUntil {player == player};
+if (!hasInterface) exitWith {};
 
 private ["_messageSent", "_tick"];
-mcd_fnc_paineffect = compile preprocessFileLineNumbers "functions\fn_painEffect.sqf";
 diag_log "punishPlayer initialized";
 
 
@@ -122,7 +121,7 @@ while {alive player} do {
 			_messageSent = false;
 			_bodyPart = selectRandom BODYPARTS;
 			[player, 0.35, _bodyPart, "bullet"] call ace_medical_fnc_addDamageToUnit;
-			[] spawn mcd_fnc_paineffect;
+			[] spawn koka_fnc_paineffect;
 		};
 	}
 	else

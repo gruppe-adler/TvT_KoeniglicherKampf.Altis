@@ -13,21 +13,12 @@ _vanillaUniforms = [
 	"U_C_Poloshirt_stripped",
 	"U_C_Poloshirt_tricolour"
 ];
-
-_randomUniform = selectRandom _vanillaUniforms;
 */
-//_randomUniform = selectRandom ["U_C_Scientist"];
 
-waitUntil {!isNull player};
-waitUntil {player == player};
-
+if (!hasInterface) exitWith {};
 
 _randomUniform = "rhs_uniform_df15";
 
-
-
-//Add equipment
-comment "Exported from Arsenal by McDiod";
 
 comment "Remove existing items";
 removeAllWeapons player;

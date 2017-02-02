@@ -3,6 +3,8 @@
 * executed via init.sqf on server
 */
 
+if (!isServer) exitWith {};
+
 private ["_houseList", "_bPosCounter", "_type","_cleanUpCounter", "_lootSpawnCounter", "_lootSpawnTotalCounter", "_startTime", "_lootSpawned", "_searchAreaSize","_houseCounter","_halfNumberOfHouses"];
 
 //Load config and loot spawn function

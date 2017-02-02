@@ -7,7 +7,7 @@
 Required Parameters:
   0 Object or Position  Anchor point from where the relative position is calculated from.
   1 Array or Number     Distance from anchor.
-  
+
 Optional Parameters:
   2 Array of Number     Direction from anchor. Default is random between 0 and 360.
   3 Number              Water position. Default is only land positions allowed.
@@ -23,7 +23,7 @@ Optional Parameters:
   5 Array, Number, Object or Vehicle Type         Force finding large enough empty position.
                           0   Max range from the selection position to look for empty space. Default is 200.
                           1   Vehicle or vehicle type to fit into an empty space.
-                            
+
                           Examples:
                             [...,[300,heli]]       Array with distance and vehicle object.
                             [...,350]              Only distance given
@@ -31,8 +31,7 @@ Optional Parameters:
                             [...,heli]             Only vehicle object given
 */
 
-//call compile preprocessFile "loot\carepackageConfig.sqf"; //moved to lootInit.sqf
-mcd_fnc_spawnCarepackage = compile preprocessFileLineNumbers "functions\fn_spawnCarepackage.sqf";
+if (!isServer) exitWith {};
 
 private ["_timeMin", "_timeMax", "_carepackagePos"];
 
@@ -59,7 +58,7 @@ while {true} do {
 	_carepackagePos = _carepackagePos vectorAdd [0,0,CAREPACKAGE_DROPHEIGHT];
 
 	//Spawn carepackage
-	[_carepackagePos] spawn mcd_fnc_spawnCarepackage;
+	[_carepackagePos] spawn koka_fnc_spawnCarepackage;
 
 	//Sleep random amount between interval limits
 	sleep ((random (_timeMax - _timeMax)) + _timeMin);

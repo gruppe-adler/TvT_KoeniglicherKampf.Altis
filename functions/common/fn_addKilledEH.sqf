@@ -6,5 +6,5 @@
 
 params ["_unit"];
 
-_unit addEventHandler ["killed", {[_this] spawn mcd_fnc_killMessage}];
+_unit addEventHandler ["killed", {[_this] spawn koka_fnc_killMessage}];
 diag_log format ["fnc_addKilledEH - Added killed EH to %1.", name _unit];

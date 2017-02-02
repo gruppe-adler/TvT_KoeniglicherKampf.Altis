@@ -1,3 +1,5 @@
+if (!isServer) exitWith {};
+
 diag_log "Round setup starting...";
 
 private ["_teamleadpos", "_parachuteposition", "_positions", "_unit", "_tooCloseFound", "_repetitions"];
@@ -43,12 +45,12 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit", "_tooClose
 		_marker setMarkerType "respawn_para";
 		_marker setMarkerColor "ColorGreen";
 	};
-	
+
 	for [{_i = 0},{_i < (count (units group _x))},{_i = _i + 1}] do {
 		_parachuteposition = _teamleadpos vectorAdd [_i*30,0,0];
 		_unit = (units group _x) select _i;
 		_unit setVariable ["PARACHUTEPOSITION", _parachuteposition, true];
-		
+
 		if (DEBUG_MODE) then {diag_log format ["Parachuteposition for %1: %2", (name _unit), _parachuteposition]};
 		sleep 0.2;
 	};
@@ -75,7 +77,7 @@ sleep TIME_UNTIL_ROUND_START;
 sleep 4;
 
 //Make players teleport themselves
-[[], "player\tpToChute.sqf"] remoteExec ["execVM",0,false];
+[] remoteExec ["koka_fnc_tpToChute",0,false];
 
 
 

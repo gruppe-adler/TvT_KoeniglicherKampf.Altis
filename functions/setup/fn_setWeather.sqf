@@ -1,8 +1,3 @@
-/*  Sets weather
-*
-*   executed via init.sqf on server
-*/
-
 private ["_overcast"];
 
 //OVERCAST =====================================================================
@@ -29,7 +24,6 @@ if (_overcast >= 75) then {
 };
 
 //extra chance of fog in the morning
-waitUntil {TIME_OF_DAY != 1000};
 if (TIME_OF_DAY <= 8) then {
   _mid = _mid + 0.12;
 };

@@ -3,6 +3,11 @@
 * Executed via init.sqf on server
 */
 
+if (!isServer) exitWith {};
+
+TEAMSETUPSTARTED = true;
+publicVariable "TEAMSETUPSTARTED";
+
 sleep 5;
 
 //Define TEAMLEADERS if random groups are off
@@ -16,7 +21,7 @@ if (!(RANDOM_TEAMS) || ((count playableUnits) == 1)) then {
 
 //set kill EHs
 {
-	[_x] call mcd_fnc_addKilledEH;
+	[_x] call koka_fnc_addKilledEH;
 } forEach playableUnits;
 
 
@@ -85,3 +90,5 @@ for [{_i = 0},{_i < (TEAM_SIZE - 1)}, {_i = _i + 1}] do {
 
 	} forEach TEAMLEADERS;
 };
+
+missionNamespace setVariable ["koka_init_randomTeamsDone",true,true];

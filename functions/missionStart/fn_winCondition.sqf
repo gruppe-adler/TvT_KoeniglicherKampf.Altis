@@ -3,9 +3,9 @@
 * executed via init.sqf on server
 */
 
-waitUntil {GAMESTARTED};
+if (!isServer) exitWith {};
+
 private ["_group", "_playersAlive", "_groupUnits"];
-mcd_fnc_endRound = compile preprocessFileLineNumbers "functions\fn_endRound.sqf";
 
 PLAYINGGROUPS = allGroups;
 
@@ -34,7 +34,7 @@ while {true} do {
 	//Check if less than 2 groups have players
 	if ((count PLAYINGGROUPS) < 2) then {
 		diag_log "Less than 2 groups left. Ending the game. winCondition.sqf halting.";
-		_endrndhndl = [] spawn mcd_fnc_endRound;
+		_endrndhndl = [] spawn koka_fnc_endRound;
 		waitUntil {scriptDone _endrndhndl};
 
 		diag_log "winCondition.sqf resuming.";

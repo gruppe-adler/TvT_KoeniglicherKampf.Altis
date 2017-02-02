@@ -7,7 +7,7 @@
 Required Parameters:
   0 Object or Position  Anchor point from where the relative position is calculated from.
   1 Array or Number     Distance from anchor.
-  
+
 Optional Parameters:
   2 Array of Number     Direction from anchor. Default is random between 0 and 360.
   3 Number              Water position. Default is only land positions allowed.
@@ -23,13 +23,15 @@ Optional Parameters:
   5 Array, Number, Object or Vehicle Type         Force finding large enough empty position.
                           0   Max range from the selection position to look for empty space. Default is 200.
                           1   Vehicle or vehicle type to fit into an empty space.
-                            
+
                           Examples:
                             [...,[300,heli]]       Array with distance and vehicle object.
                             [...,350]              Only distance given
                             [...,(typeof heli)]    Only vehicle type given
                             [...,heli]             Only vehicle object given
 */
+
+if (!isServer) exitWith {};
 
 _boats = [
 	"C_Boat_Civil_01_F",
@@ -100,13 +102,13 @@ _coastPositions = [];
 		_tooCloseCounter = _tooCloseCounter +1;
 	};
 
-	
+
 	if (_discardPos) then {
 		diag_log "No position with min distance found. Discarding position.";
 	} else {
 		_coastPositions pushBack _coastPos;
 	};
-	
+
 } forEach _waterPositions;
 
 
@@ -130,7 +132,7 @@ _closeWaterPositions = [];
 		_closeWaterPos = [_x, [7, BOATMAXCOASTDISTANCE], [0,360], 2] call SHK_pos;
 		_isWater = surfaceIsWater _closeWaterPos
 	};
-	
+
 	_closeWaterPositions pushBack _closeWaterPos;
 } forEach _coastPositions;
 
