@@ -1,6 +1,6 @@
-if (!isServer) exitWith {};
-
 call compile preprocessFile "islandConfig.sqf";
+
+if (!isServer) exitWith {};
 
 ISLAND_CENTER = (ISLAND_CONFIG select (ISLANDS find worldName)) select 1;
 ISLAND_SPAWNSEARCHRADIUS = (ISLAND_CONFIG select (ISLANDS find worldName)) select 2;

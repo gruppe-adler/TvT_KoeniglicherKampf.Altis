@@ -6,7 +6,7 @@ class Params
 		title = "Debug Mode";
 		values[] = {true, false};
 		texts[] = {"On", "Off"};
-		default = true;
+		default = false;
 	};
 
 	class randomteams

@@ -34,7 +34,7 @@ if (ARMED_VEHICLES) then {_vehicles = _vehicles + _armedVehicles};
 private ["_vehicleAmount","_min","_max", "_spawnPos", "_vehicle", "_spawnedVehicle", "_spawnFound", "_spawnPositions", "_searchCounter", "_tooCloseFound"];
 _min = MINMAX_CARS select 0;
 _max = MINMAX_CARS select 1;
-_vehicleAmount = round ((random _max-_min) + _min);
+_vehicleAmount = round ((random (_max-_min)) + _min);
 _spawnPositions = [];
 _searchCounter = 0;
 
@@ -45,8 +45,8 @@ for [{_i = 0},{_i < _vehicleAmount},{_i = _i + 1}] do {
 
     for [{_j=0}, {_j<100}, {_j=_j+1}] do {
 
-        _spawnPos = [PLAYAREACENTER,[0,ISLAND_PLAYAREASIZE],[0,360]] call koka_fnc_randomPos;
-        _road = [_spawnPos,200,[]] call BIS_fnc_nearestRoad;
+        _spawnPos = [PLAYAREACENTER,[0,ISLAND_PLAYAREASIZE],[0,360],0] call koka_fnc_randomPos;
+        _road = [_spawnPos,300,[]] call BIS_fnc_nearestRoad;
         _spawnPos = if (isNull _road) then {_spawnPos} else {getPos _road};
 
         //are there any other cars too close by?
