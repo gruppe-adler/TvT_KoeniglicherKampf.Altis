@@ -43,7 +43,7 @@ ISLANDS = [
 	'Stratis',
 	'SugarLake',
 	'Takistan',
-	'Tanoa'
+	'Tanoa',
 	'utes',
 	'Zargabad'
 ];
@@ -167,14 +167,14 @@ ISLAND_CONFIG = [
 	3000,											// play area search radius (only if not whole island)
 	'Takistan'],									// name
 
-	[[1382.41,950.516,0],								// initial startposition
-	[9769.35,9957.41,0],									// island center
+	[[1382.41,950.516,0],							// initial startposition
+	[9769.35,9957.41,0],							// island center
 	3000, 											// parachute spawnradius from center -> +500 = playareasize
 	1000, 											// initial searchradius for blue circle (only if whole island)
 	[3000,2700,1400,1100,800,600,400,200,100,50],	// circlesizes
 	false,											// use whole island as play area?
 	3000,											// play area search radius (only if not whole island)
-	'Tanoa'],									// name
+	'Tanoa'],										// name
 
 	[[3978,3608,0],									// initial startposition
 	[3635,3757,0],									// island center
