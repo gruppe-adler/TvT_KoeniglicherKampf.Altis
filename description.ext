@@ -17,6 +17,7 @@ loadScreen = "data\logo.paa";
 enableDebugConsole = 1;
 respawnDelay = 9999999;
 allowFunctionsRecompile = 1;
+disabledAI = 1;
 
 //======================================================================
 #include "cfgACE.hpp"

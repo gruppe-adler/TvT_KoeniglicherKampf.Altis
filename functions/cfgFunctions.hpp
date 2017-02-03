@@ -8,8 +8,8 @@ class koka {
         class killMessage {};
         class nearestCoast {};
         class painEffect {};
+        class randomPos {};
         class spawnCarepackage {};
-        class spawnLoot {};
     };
 
     class init {
@@ -43,6 +43,7 @@ class koka {
         class setupPlayArea {};
         class setWeather {};
         class spawnBoats {};
+        class spawnLoot {};
         class spawnVehicles {};
         class startEquipment {};
         class startRound {};

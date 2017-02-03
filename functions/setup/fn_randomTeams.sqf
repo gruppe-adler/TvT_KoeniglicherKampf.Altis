@@ -33,14 +33,12 @@ TEAMLEADERS = [];
 } forEach _players;
 
 //Enough players?
-if (_numberOfTeams < 2) then {
+if (_numberOfTeams < 2 && (count _players) > 1) then {
 	diag_log "Unable to randomize teams - not enough players.";
 	diag_log format ["Number of players: %1", (count _players)];
 	diag_log format ["Teamsize selected: %1", TEAM_SIZE];
 	_numberOfTeams = 2;
-}
-else
-{
+} else {
 	diag_log format ["Randomizing %1 players into %2 teams", (count _players), _numberOfTeams];
 };
 

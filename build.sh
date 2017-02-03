@@ -6,6 +6,7 @@ missionname="TvT_KoeniglicherKampf"
 
 islands=(
 	Altis
+	Beketov
 	Chernarus
 	fata
 	IslaDuala3
@@ -17,6 +18,7 @@ islands=(
 	Stratis
 	SugarLake
 	Takistan
+	Tanoa
 	utes
 	Zargabad
 )

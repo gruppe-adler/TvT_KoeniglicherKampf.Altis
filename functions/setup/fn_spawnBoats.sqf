@@ -30,7 +30,7 @@ _waterPositions = [];
 for "_i" from 0 to BOATMAX do {
 
 	//find position in playarea
-	_randomPos = [PLAYAREACENTER, [0,ISLAND_PLAYAREASIZE], [0,360], 1] call SHK_pos;
+	_randomPos = [PLAYAREACENTER, [0,ISLAND_PLAYAREASIZE], [0,360]] call koka_fnc_randomPos;
 
 	//if position is water, add to _waterPositions
 	if (surfaceIsWater _randomPos) then {_waterPositions pushBack _randomPos};
@@ -54,26 +54,17 @@ if (DEBUG_MODE) then {
 //find closest coast
 _coastPositions = [];
 {
-	_tooCloseFound = true;
-	_tooCloseCounter = 0;
-	_discardPos = false;
-
-	while {_tooCloseFound} do {
-		_coastPos = [_x, [0,1], [0,360], 0] call SHK_pos;
-
+	_discardPos = true;
+	for [{_i=0}, {_i<10}, {_i=_i+1}] do {
+		_coastPos = [_x, 500, 4] call koka_fnc_nearestCoast;
 		_tooCloseFound = false;
 		{
 			if ((_x distance2D _coastPos) < BOATMINDISTANCE) exitWith {_tooCloseFound = true};
 		} forEach _coastPositions;
 
 		//if repeated x times, discard position
-		if (_tooCloseCounter >= 6) then {
-			_tooCloseFound = false;
-			_discardPos = true;
-		};
-		_tooCloseCounter = _tooCloseCounter +1;
+		if (str _coastPos != "[0,0,0]" && !_tooCloseFound) exitWith {_discardPos = false};
 	};
-
 
 	if (_discardPos) then {
 		diag_log "No position with min distance found. Discarding position.";
@@ -99,13 +90,14 @@ if (DEBUG_MODE) then {
 //find water position close to coast positions
 _closeWaterPositions = [];
 {
-	_isWater = false;
-	while {!_isWater} do {
-		_closeWaterPos = [_x, [7, BOATMAXCOASTDISTANCE], [0,360], 2] call SHK_pos;
-		_isWater = surfaceIsWater _closeWaterPos
+	for [{_i=0}, {_i<10}, {_i=_i+1}] do {
+		_closeWaterPos = [_x, [7, BOATMAXCOASTDISTANCE], [0,360], 2] call koka_fnc_randomPos;
+		if !(surfaceIsWater _closeWaterPos) exitWith {};
 	};
 
-	_closeWaterPositions pushBack _closeWaterPos;
+	if !(surfaceIsWater _closeWaterPos) then {
+		_closeWaterPositions pushBack _closeWaterPos;
+	};
 } forEach _coastPositions;
 
 //add markers if debug mode
@@ -129,3 +121,5 @@ if (DEBUG_MODE) then {
 	diag_log format ["%1 spawned at %2", _boatType, _x];
 
 } forEach _closeWaterPositions;
+
+missionNamespace setVariable ["koka_init_spawnBoatsDone",true,true];

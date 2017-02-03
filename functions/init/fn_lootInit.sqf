@@ -5,7 +5,7 @@
 
 if (!isServer) exitWith {};
 
-private ["_houseList", "_bPosCounter","_cleanUpCounter", "_lootSpawnCounter", "_lootSpawnTotalCounter", "_startTime", "_lootSpawned", "_searchAreaSize","_houseCounter","_halfNumberOfHouses"];
+private ["_houseList", "_bPosCounter","_cleanUpCounter", "_lootSpawnCounter", "_lootSpawnTotalCounter", "_startTime", "_lootSpawned", "_searchAreaSize","_halfNumberOfHouses"];
 
 //Load config and loot spawn function
 call compile preprocessFileLineNumbers "loot\lootConfig.sqf";
@@ -30,7 +30,6 @@ if (DEBUG_MODE) then {HOUSELIST = _houseList; BUGGEDLOOTCOUNTER = 0};
 
 //Main loop - spawn loot in each house
 _lootSpawnTotalCounter = 0;
-_houseCounter = 0;
 _halfNumberOfHouses = (count _houseList) / 2;
 {
 	_bPosCounter = 0;
@@ -44,7 +43,7 @@ _halfNumberOfHouses = (count _houseList) / 2;
 	while {((str _buildingPos) != "[0,0,0]")} do {
 
 		if (LOOT_PROBABILITY > random 100) then {
-			[_buildingPos] spawn koka_fnc_spawnLoot;
+			[_buildingPos,_forEachIndex == (count _houseList)-1] spawn koka_fnc_spawnLoot;
 			_lootSpawnCounter = _lootSpawnCounter +1;
 			_lootSpawned = true;
 		};
@@ -55,7 +54,7 @@ _halfNumberOfHouses = (count _houseList) / 2;
 	};
 
 	_lootSpawnTotalCounter = _lootSpawnTotalCounter + _lootSpawnCounter;
-}foreach _houseList;
+} foreach _houseList;
 
 diag_log format ["Loot spawning completed in %1 seconds. Spawned loot in %2 positions.", (serverTime - _startTime), _lootSpawnTotalCounter];
 if (DEBUG_MODE) then {diag_log format ["Buggy loot spawns: %1", BUGGEDLOOTCOUNTER]};

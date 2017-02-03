@@ -13,11 +13,9 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit", "_tooClose
 	_tooCloseFound = true;
 	while {_tooCloseFound} do {
 
-		//find position that is not over water
-		_isWater = true;
-		while {_isWater} do {
-			_teamleadpos = [PLAYAREACENTER, [0, ISLAND_SPAWNSEARCHRADIUS], [0,360], 1] call SHK_pos;
-			_isWater = surfaceIsWater _teamleadpos;
+		for [{_i=0}, {_i<100}, {_i=_i+1}] do {
+			_teamleadpos = [PLAYAREACENTER, [0, ISLAND_SPAWNSEARCHRADIUS], [0,360]] call koka_fnc_randomPos;
+			if !(surfaceIsWater _teamleadpos) exitWith {};
 		};
 		_teamleadpos = _teamleadpos vectorAdd [0,0,JUMP_HEIGHT];
 
@@ -52,7 +50,6 @@ private ["_teamleadpos", "_parachuteposition", "_positions", "_unit", "_tooClose
 		_unit setVariable ["PARACHUTEPOSITION", _parachuteposition, true];
 
 		if (DEBUG_MODE) then {diag_log format ["Parachuteposition for %1: %2", (name _unit), _parachuteposition]};
-		sleep 0.2;
 	};
 } forEach TEAMLEADERS;
 

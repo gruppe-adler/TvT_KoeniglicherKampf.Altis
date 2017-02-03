@@ -21,7 +21,7 @@ PLAYINGGROUPS = allGroups;
 	} forEach PLAYINGGROUPS;
 
 	if ((count PLAYINGGROUPS) < 2) then {
-		_endrndhndl = [] call koka_fnc_endRound;
+		[] call koka_fnc_endRound;
 		[_handle] call CBA_fnc_removePerFrameHandler;
 	};
 }, 5, []] call CBA_fnc_addPerFrameHandler;

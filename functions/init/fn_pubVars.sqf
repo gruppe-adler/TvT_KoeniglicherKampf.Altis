@@ -1,6 +1,6 @@
 if (!isServer) exitWith {};
 
-TIME_UNTIL_ROUND_START          = 10;           //how long until the round starts after setup\startround.sqf is executed
+TIME_UNTIL_ROUND_START          = 30;           //how long until the round starts after setup is complete
 TIME_UNTIL_FIRST_CIRCLE         = 300;          //how long until the first circle spawns
 TIME_UNTIL_GETIN_FIRST          = 420;          //how long you have to get into the first circle
 TIME_UNTIL_GETIN                = 180;          //how long you have to get into the circles

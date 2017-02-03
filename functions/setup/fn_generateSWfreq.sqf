@@ -30,10 +30,10 @@ _radioMax = 512 * 10;
 	_x setVariable ["swfreq", _freqString, true];
 
 	if (DEBUG_MODE) then {
-		diag_log format ["Frequency %1 saved for %2", _freqString, (name _teamlead)];
+		diag_log format ["Frequency %1 saved for %2", _freqString, (name _x)];
 	};
 } forEach TEAMLEADERS;
 
-[] remoteExec ["koka_fnc_setSWfreq",0,false];
+/*[] remoteExec ["koka_fnc_setSWfreq",0,false];*/
 
-missionNamespace getVariable ["koka_init_generateSWfreqDone",true,true];
+missionNamespace setVariable ["koka_init_generateSWfreqDone",true,true];

@@ -5,10 +5,8 @@
 
 private ["_markerPos", "_totalDistPower", "_type", "_checkedDistPower", "_checkID"];
 
-_pos =	(_this select 0);
-_pos0 =	(_pos select 0);
-_pos1 =	(_pos select 1);
-_pos2 =	(_pos select 2);
+params ["_pos","_isLast"];
+_pos params ["_pos0","_pos1","_pos2"];
 
 //Random loot type =================================================================================================================================
 //Generate random number based on distribution table
@@ -136,11 +134,13 @@ if (DEBUG_MODE) then {
 	else
 	{
 		_id=format ["%1",_pos];
-		_debug=createMarker [_id,_markerPos];
+		_debug = createMarker [_id,_markerPos];
 		_debug setMarkerShape "ICON";
 		_debug setMarkerType "hd_dot";
 		_debug setMarkerColor "ColorRed";
-		_txt=format ["%1",_type];
-		_debug setMarkerText _txt;
 	};
+};
+
+if (_isLast) then {
+	missionNamespace setVariable ["koka_init_lootInitDone",true,true];
 };

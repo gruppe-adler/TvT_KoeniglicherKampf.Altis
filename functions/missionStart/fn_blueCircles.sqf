@@ -53,7 +53,7 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 	diag_log format ["New circle center search radius: %1", _searchradius];
 	diag_log format ["Searching for new circle center."];
 
-	NEWCIRCLEPOS = [NEWCIRCLEPOS, [0,_searchradius], [0,360]] call SHK_pos;
+	NEWCIRCLEPOS = [NEWCIRCLEPOS, [0,_searchradius], [0,360]] call koka_fnc_randomPos;
 	diag_log format ["New circle center found at %1", NEWCIRCLEPOS];
 
 	//Convert old marker to black

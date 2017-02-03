@@ -6,7 +6,7 @@
 if (!hasInterface) exitWith {};
 
 _spawnPositionCenter = (ISLAND_CONFIG select (ISLANDS find worldName)) select 0;
-_teleportPosition = [_spawnPositionCenter,[0,15], [0,360]] call SHK_pos;
+_teleportPosition = [_spawnPositionCenter,[0,15], [0,360]] call koka_fnc_randomPos;
 
 diag_log format ["Startposition read - Moving player to: %1", _teleportPosition];
 
