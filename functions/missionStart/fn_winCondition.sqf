@@ -1,46 +1,27 @@
-/* Checks if anyone has won yet
-*
-* executed via init.sqf on server
-*/
-
 if (!isServer) exitWith {};
 
-private ["_group", "_playersAlive", "_groupUnits"];
-
 PLAYINGGROUPS = allGroups;
+[{
+	params ["_args","_handle"];
+	private ["_group", "_playersAlive"];
 
-//Main
-while {true} do {
-	//Check what groups still have players
 	{
 		_group = _x;
-		_groupUnits = units _group;
-
 		_playersAlive = false;
 		{
 			if (alive _x) then {
 				_playersAlive = true;
 			};
-		} forEach _groupUnits;
-
+		} forEach (units _group);
 
 		if (!_playersAlive) then {
 			PLAYINGGROUPS = PLAYINGGROUPS - [_group];
 			diag_log format ["No more players in group %1", _group];
 		};
-
 	} forEach PLAYINGGROUPS;
 
-	//Check if less than 2 groups have players
 	if ((count PLAYINGGROUPS) < 2) then {
-		diag_log "Less than 2 groups left. Ending the game. winCondition.sqf halting.";
-		_endrndhndl = [] spawn koka_fnc_endRound;
-		waitUntil {scriptDone _endrndhndl};
-
-		diag_log "winCondition.sqf resuming.";
+		_endrndhndl = [] call koka_fnc_endRound;
+		[_handle] call CBA_fnc_removePerFrameHandler;
 	};
-
-	sleep 5;
-};
-
-diag_log "Win condition initialized.";
+}, 5, []] call CBA_fnc_addPerFrameHandler;

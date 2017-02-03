@@ -4,6 +4,7 @@ class koka {
 
         class addKilledEH {};
         class endRound {};
+        class findHouses {};
         class killMessage {};
         class nearestCoast {};
         class painEffect {};

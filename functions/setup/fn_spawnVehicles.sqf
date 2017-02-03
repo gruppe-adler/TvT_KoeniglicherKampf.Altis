@@ -3,34 +3,6 @@
 * executed via init.sqf on server
 */
 
-/*
-Required Parameters:
-  0 Object or Position  Anchor point from where the relative position is calculated from.
-  1 Array or Number     Distance from anchor.
-
-Optional Parameters:
-  2 Array of Number     Direction from anchor. Default is random between 0 and 360.
-  3 Number              Water position. Default is only land positions allowed.
-                          0   Find closest land. Search outwards 360 degrees (20 degree steps) and 20m steps.
-                          1   Allow water positions.
-                          2   Find only water positions.
-  4 Array               Road positions.
-                          0  Number  Road position forcing. Default is 0.
-                               0    Do not search for road positions.
-                               1    Find closest road position. Return the generated random position if none found.
-                               2    Find closest road position. Return empty array if none found.
-                          1  Number   Road search range. Default is 200m.
-  5 Array, Number, Object or Vehicle Type         Force finding large enough empty position.
-                          0   Max range from the selection position to look for empty space. Default is 200.
-                          1   Vehicle or vehicle type to fit into an empty space.
-
-                          Examples:
-                            [...,[300,heli]]       Array with distance and vehicle object.
-                            [...,350]              Only distance given
-                            [...,(typeof heli)]    Only vehicle type given
-                            [...,heli]             Only vehicle object given
-*/
-
 if (!isServer) exitWith {};
 
 _vehicles = [
@@ -57,7 +29,7 @@ if (ARMED_VEHICLES) then {_vehicles = _vehicles + _armedVehicles};
 private ["_vehicleAmount","_min","_max", "_spawnPos", "_vehicle", "_spawnedVehicle", "_spawnFound", "_spawnPositions", "_searchCounter", "_tooCloseFound"];
 _min = MINMAX_CARS select 0;
 _max = MINMAX_CARS select 1;
-_vehicleAmount = floor ((random _max) max _min)+1;
+_vehicleAmount = round ((random _max-_min) + _min);
 _spawnPositions = [];
 _searchCounter = 0;
 
@@ -81,7 +53,7 @@ for [{_i = 0},{_i < _vehicleAmount},{_i = _i + 1}] do {
         {
             if ((_x distance2D _spawnPos) < CARMINDISTANCE) exitWith {_tooCloseFound = true; diag_log "Vehicle spawn - too close to other vehicle."};
         } forEach _spawnPositions;
-  };
+    };
 
     _spawnPositions pushBack _spawnPos;
     _spawnedVehicle = _vehicle createVehicle _spawnPos;

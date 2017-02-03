@@ -7,38 +7,69 @@ backpackList = [];
 uniformList = [];
 vestList = [];
 helmList = [];
+weaponList = [];
+accessoryList = [];
 listthem = true;
 
 while {listthem} do {
 
 	_bp = backpack player;
-	_alreadyin = backpackList find _bp;
-	if (_alreadyin == -1) then {
-		backpackList = backpackList + [_bp];
-		player sideChat format ["%1 added to backpacks.", _bp];
+	_id = backpackList pushBackUnique _bp;
+	if (_id != -1) then {
+		systemChat format ["%1 added to backpacks.", _bp];
 	};
 
 	_uf = uniform player;
-	_alreadyin = uniformList find _uf;
-	if (_alreadyin == -1) then {
-		uniformList = uniformList + [_uf];
-		player sideChat format ["%1 added to uniforms.", _uf];
+	_id = uniformList pushBackUnique _uf;
+	if (_id != -1) then {
+		systemChat format ["%1 added to uniforms.", _uf];
 	};
 
 	_vst = vest player;
-	_alreadyin = vestList find _vst;
-	if (_alreadyin == -1) then {
-		vestList = vestList + [_vst];
-		player sideChat format ["%1 added to uniforms.", _vst];
+	_id = vestList pushBackUnique _vst;
+	if (_id != -1) then {
+		systemChat format ["%1 added to vests.", _vst];
 	};
 
 	_hlm = headgear player;
-	_alreadyin = helmList find _hlm;
-	if (_alreadyin == -1) then {
-		helmList = helmList + [_hlm];
-		player sideChat format ["%1 added to uniforms.", _hlm];
+	_id = helmList pushBackUnique _hlm;
+	if (_id != -1) then {
+		systemChat format ["%1 added to helmets.", _hlm];
 	};
 
-	sleep 0.2;
+	_wp = primaryWeapon player;
+	_id = weaponList pushBackUnique _wp;
+	if (_id != -1) then {
+		systemChat format ["%1 added to weapons.", _wp];
+	};
 
+	_wp = secondaryWeapon player;
+	_id = weaponList pushBackUnique _wp;
+	if (_id != -1) then {
+		systemChat format ["%1 added to weapons.", _wp];
+	};
+
+	_wp = handgunWeapon player;
+	_id = weaponList pushBackUnique _wp;
+	if (_id != -1) then {
+		systemChat format ["%1 added to weapons.", _wp];
+	};
+
+	_accessories = primaryWeaponItems player;
+	{
+		if (_x != "") then {_id = accessoryList pushBackUnique _x} else {_id = -1};
+		if (_id != -1) then {
+			systemChat format ["%1 added to accessories.", _wp];
+		};
+	} forEach _accessories;
+
+	_accessories = player weaponAccessories (handgunWeapon player);
+	{
+		if (_x != "") then {_id = accessoryList pushBackUnique _x} else {_id = -1};
+		if (_id != -1) then {
+			systemChat format ["%1 added to accessories.", _wp];
+		};
+	} forEach _accessories;
+
+	sleep 0.2;
 };

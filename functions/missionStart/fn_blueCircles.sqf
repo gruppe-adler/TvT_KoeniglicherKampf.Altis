@@ -1,15 +1,8 @@
-/* Generates blue circles and ends the game if no winner
-*
-* Executed after round start via init.sqf on server
-*/
-
 if (!isServer) exitWith {};
 
 private ["_firstOfTheLast","_circleSizes", "_circleID", "_initialRadius", "_searchRadius", "_marker", "_circleInterval", "_firstCircle", "_messagetext","_oldMarker"];
 
-
 _circleSizes = (ISLAND_CONFIG select (ISLANDS find worldName)) select 4;
-//_circleSizes = CIRCLESIZES;
 _circleID = 0;
 
 //Only use islandconfig for first blue circle searchradius, if whole island is used
@@ -24,14 +17,6 @@ NEWCIRCLEPOS = PLAYAREACENTER;
 NEWCIRCLESIZE = ISLAND_PLAYAREASIZE;
 publicVariable "NEWCIRCLEPOS";
 publicVariable "NEWCIRCLESIZE";
-
-//How often are new circles spawned?
-/*
-_circleInterval = (GAME_TIME - TIME_UNTIL_FIRST_CIRCLE - TIME_UNTIL_GETIN_FIRST) / (count _circleSizes);
-if (_circleInterval < (TIME_UNTIL_GETIN - 30)) then {
-	_circleInterval = (TIME_UNTIL_GETIN - 30);
-};
-*/
 
 _circleInterval = CIRCLE_INTERVAL;
 _firstOfTheLast = _circleSizes select ((count _circleSizes) - NUMBER_OF_FAST_CIRCLES);
@@ -118,9 +103,7 @@ for [{_i = 0},{_i < (count _circleSizes)},{_i = _i + 1}] do {
 
 		CIRCLESSTARTED = true;
 		publicVariable "CIRCLESSTARTED";
-	}
-	else
-	{
+	} else {
 		sleep 10;
 		_messagetext = format ["In %1 minutes, play will be limited to the area inside blue circle!", (TIME_UNTIL_GETIN / 60)];
 		[_messagetext,0,0,4,1] remoteExec ["BIS_fnc_dynamicText",0,false];

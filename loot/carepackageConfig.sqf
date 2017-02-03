@@ -5,42 +5,70 @@
 
 
 CPWEAPONS = [
-	"arifle_MXM_F",
-	"srifle_EBR_F",
-	"rhs_asval_pso1",
-	"rhs_weap_sr25",
-	"SMA_HK417_16in_afg",
-	"SMA_HK417_16in_afg_tan",
-	"srifle_DMR_05_blk_F",
-	"rhs_weap_m14ebrri",
+	//vanilla
 	"LMG_Zafir_F",
-	"MMG_01_tan_F",
-	"rhs_weap_pkp",
+	"LMG_Mk200_F",
+
+	//rhs
+	"rhs_weap_asval",
+	"rhs_weap_asval_grip_npz",
 	"rhs_weap_pkm",
-	"rhs_weap_m249_pip_S_para",
-	"rhs_weap_m240B"
+	"rhs_weap_pkp",
+	"rhs_weap_vss",
+	"rhs_weap_vss_grip_npz",
+	"rhs_weap_m14ebrri",
+	"rhs_weap_m240B",
+	"rhs_weap_m240G",
+	"rhs_weap_m249",
+	"rhs_weap_m249_pip_L_para",
+	"rhs_weap_m249_pip_S",
+	"rhs_weap_m249_pip",
+	"rhs_weap_m32",
+	"rhs_weap_minimi_para_railed"
 ];
 
 CPSNIPERS = [
-	"rhs_weap_sr25",
-	"srifle_GM6_F",
-	"srifle_LRR_F",
+	//vanilla
+	"srifle_EBR_F",
+	"arifle_MXM_Black_F",
+	"srifle_DMR_01_F",
+
+	//rhs
 	"rhs_weap_svdp_npz",
 	"rhs_weap_svds_npz",
-	"rhs_weap_XM2010_d",
+	"rhs_weap_M107",
+	"rhs_weap_M107_w",
+	"rhs_weap_m14ebrri",
+	"rhs_weap_XM2010",
 	"rhs_weap_XM2010_wd",
-	"rhs_weap_M107"
+	"rhs_weap_m24sws",
+	"rhs_weap_m24sws_ghillie",
+	"rhs_weap_m40a5",
+	"rhs_weap_m40a5_wd",
+	"rhs_weap_sr25",
+	"rhs_weap_sr25_ec_wd",
+	"rhs_weap_m82a1",
+	"rhs_weap_t5000"
 ];
 
 CPSCOPES = [
+	//vanilla
 	"optic_DMS",
-	"optic_SOS",
-	"optic_AMS",
 	"optic_LRPS",
-	"optic_KHS_old",
+	"optic_SOS",
+
+	//rhs
+	"rhs_acc_dh520x56",
+	"rhsusf_acc_M8541",
+	"rhsusf_acc_M8541_low_wd",
+	"rhsusf_acc_premier",
 	"rhsusf_acc_LEUPOLDMK4",
+	"rhsusf_acc_LEUPOLDMK4_2",
+	"rhsusf_acc_ACOG_MDO",
+
+	//fhq
 	"FHQ_optic_LeupoldERT",
-	"rhsusf_acc_LEUPOLDMK4_2"
+	"FHQ_optic_LeupoldERT_tan"
 ];
 
 CPAMMO = [
@@ -57,36 +85,20 @@ CPMEDICAL = [
 	"ACE_bloodIV_250"
 ];
 
-
 CPVESTSANDUNIFORMS = [
 	"U_I_FullGhillie_ard",
 	"U_B_FullGhillie_ard",
-	"U_I_FullGhillie_lsh",
 	"U_B_FullGhillie_lsh",
-	"U_I_FullGhillie_sard",
 	"U_B_FullGhillie_sard",
 	"U_B_GhillieSuit",
-	"U_O_GhillieSuit",
 	"U_I_GhillieSuit",
-	"rhs_6b23_rifleman",
-	"ARC_Common_Blk_Plate_Carrier_H",
-	"ARC_Common_OD_Plate_Carrier_H",
-	"ARC_Common_TAN_Plate_Carrier_H",
-	"ARC_Common_TAN_HPC",
-	"ARC_Common_OD_HPC_GL",
-	"ARC_GER_Flecktarn_Plate_Carrier_H",
-	"ARC_GER_Flecktarn_HPC_GL",
-	"ARC_GER_Tropentarn_HPC_GL",
-	"V_PlateCarrierSpec_mtp",
-	"V_PlateCarrierIAGL_dgtl",
-	"V_RebreatherB"
+	"U_B_T_FullGhillie_tna_F",
+	"U_B_T_Sniper_F",
+	"U_O_T_Sniper_F"
 ];
 
 
-
-
-
 //If medium scopes are rare by parameter, add them to carepackage loot:
-if (!SCOPES_ALLOWED) then {
+/*if (!SCOPES_ALLOWED) then {
 	CPSCOPES = CPSCOPES + scopesLoot;
-};
+};*/

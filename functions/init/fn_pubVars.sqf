@@ -25,7 +25,6 @@ BOATMAXCOASTDISTANCE            = 35;           //maximum distance from coast th
 BOATMAX                         = 70;           //max number of boats thats theoretically possible (real amount depends on how much of playzone is water)
 
 GAMESTARTED = false;
-TEAMSETUPSTARTED = false;
 CIRCLESSTARTED = false;
 FIRSTCIRCLE = true;
 
@@ -49,7 +48,6 @@ publicVariable "BOATMINDISTANCE";
 publicVariable "BOATMAXCOASTDISTANCE";
 publicVariable "BOATMAX";
 publicVariable "GAMESTARTED";
-publicVariable "TEAMSETUPSTARTED";
 publicVariable "CIRCLESSTARTED";
 publicVariable "FIRSTCIRCLE";
 

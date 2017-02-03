@@ -19,8 +19,9 @@ respawnDelay = 9999999;
 allowFunctionsRecompile = 1;
 
 //======================================================================
-#include "cfgParams.hpp"
 #include "cfgACE.hpp"
+#include "cfgHouses.hpp"
+#include "cfgParams.hpp"
 
 class CfgFunctions {
     #include "functions\cfgFunctions.hpp"

@@ -8,19 +8,10 @@ if (!isServer) exitWith {};
 private ["_swFrequencies", "_freq", "_alreadyIn", "_freqString", "_teamlead"];
 _swFrequencies = [];
 
-diag_log "SW Frequency setup starting.";
-["Setting SW frequency...",0,0,2,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
+_radioMin = 30 * 10;
+_radioMax = 512 * 10;
 
-//Frequencies for PRC-152
-_radioMin = 30;
-_radioMax = 512;
-
-//Set x10 for random number generator
-_radioMin = _radioMin * 10;
-_radioMax = _radioMax * 10;
-
-
-//Generate frequencies
+//generate
 {
 	_alreadyIn = 1000;
 	while {_alreadyIn != -1} do {
@@ -33,29 +24,16 @@ _radioMax = _radioMax * 10;
 	};
 } forEach TEAMLEADERS;
 
+//save in TLs
+{
+	_freqString = str (_swFrequencies select _forEachIndex);
+	_x setVariable ["swfreq", _freqString, true];
 
-//Save frequencies as public variable in teamleaders
-for "_i" from 0 to count TEAMLEADERS -1 do {
-
-	//Convert to string
-	_freqString = str (_swFrequencies select _i);
-	_teamlead = TEAMLEADERS select _i;
-
-	//Save in teamleader and broadcast
-	_teamlead setVariable ["swfreq", _freqString, true];
-
-	//Write to log
 	if (DEBUG_MODE) then {
 		diag_log format ["Frequency %1 saved for %2", _freqString, (name _teamlead)];
 	};
+} forEach TEAMLEADERS;
 
-	sleep 0.1;
-};
-
-//Wait, so everyone has received their variables
-sleep 2;
-
-//Make players set their frequency
 [] remoteExec ["koka_fnc_setSWfreq",0,false];
 
 missionNamespace getVariable ["koka_init_generateSWfreqDone",true,true];

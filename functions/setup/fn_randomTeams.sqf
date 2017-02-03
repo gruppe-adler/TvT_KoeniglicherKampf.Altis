@@ -5,12 +5,10 @@
 
 if (!isServer) exitWith {};
 
-TEAMSETUPSTARTED = true;
-publicVariable "TEAMSETUPSTARTED";
+private ["_players","_numberOfTeams", "_teammember", "_teamleadID"];
 
-sleep 5;
+missionNamespace setVariable ["TEAMSETUPSTARTED",true,true];
 
-//Define TEAMLEADERS if random groups are off
 if (!(RANDOM_TEAMS) || ((count playableUnits) == 1)) then {
 	TEAMLEADERS = [];
 	{
@@ -25,20 +23,9 @@ if (!(RANDOM_TEAMS) || ((count playableUnits) == 1)) then {
 } forEach playableUnits;
 
 
-if !(isNil "TEAMLEADERS") exitWith{diag_log "Random teams are off."};
-
-//==================================================================== Start of randomization
-
-["Randomizing teams...",0,0,2,0.3] remoteExec ["BIS_fnc_dynamicText",0,false];
-sleep 5;
-
-private ["_players","_numberOfTeams", "_teammember", "_teamleadernames", "_teamleadID"];
-diag_log "Team randomizer starting...";
-
 _players = playableUnits;
 _numberOfTeams = ceil ((count _players) / TEAM_SIZE);
 TEAMLEADERS = [];
-_teamleadernames = [];
 
 //Delete existing groups
 {
@@ -65,11 +52,11 @@ for [{_i = 0},{_i < _numberOfTeams},{_i = _i + 1}] do {
 };
 
 //Teamleader names for log
+diag_log "Teamleaders selected:";
 {
-	_teamleadernames = _teamleadernames + [name _x];
+	diag_log str (name _x);
 } forEach TEAMLEADERS;
 
-diag_log format ["Teamleaders selected: %1", _teamleadernames];
 
 //Add remaining players to teamleaders
 for [{_i = 0},{_i < (TEAM_SIZE - 1)}, {_i = _i + 1}] do {
@@ -77,17 +64,15 @@ for [{_i = 0},{_i < (TEAM_SIZE - 1)}, {_i = _i + 1}] do {
 	{
 		if ((count _players) == 0) then {
 			diag_log "No more players to add to teamleaders - uneven teams";
-		}
-		else
-		{
+
+		} else {
 			_teammember = selectRandom _players;
 			_players = _players - [_teammember];
 			[_teammember] joinSilent _x;
-			diag_log format ["%1 added to %2's team.", (name _teammember), (_teamleadernames select _teamleadID)];
+			diag_log format ["%1 added to %2's team.", (name _teammember), (name _x)];
 		};
 
 		_teamleadID = _teamleadID +1;
-
 	} forEach TEAMLEADERS;
 };
 

@@ -3,13 +3,13 @@ private ["_overcast"];
 //OVERCAST =====================================================================
 //random
 if (WEATHER_SETTING == -1) then {
-  _availableSettings = getArray (missionConfigFile >> "Params" >> "WeatherSetting" >> "values");
-  _availableSettings = _availableSettings - [-1];
-  _overcast = selectRandom _availableSettings;
+    _availableSettings = getArray (missionConfigFile >> "Params" >> "WeatherSetting" >> "values");
+    _availableSettings = _availableSettings - [-1];
+    _overcast = selectRandom _availableSettings;
 
 //fixed
 } else {
-  _overcast = WEATHER_SETTING;
+    _overcast = WEATHER_SETTING;
 };
 
 diag_log format ["setWeather.sqf - Setting overcast to %1.", _overcast];
@@ -20,12 +20,12 @@ _mid = 0.03;
 
 //extra chance of fog when its raining
 if (_overcast >= 75) then {
-  _mid = _mid + 0.08;
+    _mid = _mid + 0.08;
 };
 
 //extra chance of fog in the morning
 if (TIME_OF_DAY <= 8) then {
-  _mid = _mid + 0.12;
+    _mid = _mid + 0.12;
 };
 
 _fog = random [0,_mid,0.4];

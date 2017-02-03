@@ -10,16 +10,6 @@ _pos0 =	(_pos select 0);
 _pos1 =	(_pos select 1);
 _pos2 =	(_pos select 2);
 
-
-//Spawn invisible container ========================================================================================================================
-_BARREL = createVehicle ["Land_BarrelEmpty_F",[_pos0,_pos1,_pos2+0.1], [], 0, "can_Collide"];
-waitUntil {!isNull _BARREL};
-//wait until barrel falls
-sleep 0.8;
-
-_holder = createVehicle ["groundweaponholder",[_pos0,_pos1,(getposATL _BARREL select 2)], [], 0, "can_Collide"];
-deletevehicle _BARREL;
-
 //Random loot type =================================================================================================================================
 //Generate random number based on distribution table
 _totalDistPower = 0;
@@ -41,6 +31,101 @@ while {_type == 1000} do {
 	_checkID = _checkID + 1;
 };
 
+//Spawn invisible container ========================================================================================================================
+_BARREL = createVehicle ["Land_BarrelEmpty_F",[_pos0,_pos1,_pos2+0.1], [], 0, "can_Collide"];
+waitUntil {!isNull _BARREL};
+//wait until barrel falls
+sleep 0.8;
+
+_holder = createVehicle ["groundweaponholder",[_pos0,_pos1,(getposATL _BARREL select 2)], [], 0, "can_Collide"];
+deletevehicle _BARREL;
+
+//Add items to weapon holder =======================================================================================================================
+switch (_type) do {
+	//weapons
+	case (0): {
+		_loot= selectRandom weaponsLoot;
+
+		_magazines = getArray (configFile / "CfgWeapons" / _loot / "magazines");
+
+		if ((count _magazines) > 0) then {
+			_magazineClass = selectRandom _magazines;
+
+			_holder addWeaponCargoGlobal [_loot, 1];
+			_holder addMagazineCargoGlobal [_magazineClass, ((round random 4) max 1)];
+		} else {
+			diag_log format ["Could not find magazines for weapon %1", _loot];
+		};
+	};
+
+	//magazines
+	case (1): {
+		_weapon= selectRandom allWeaponsLoot;
+		_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
+
+		if ((count _magazines) > 0) then {
+			_loot = selectRandom _magazines;
+
+			_amount = (round random 4) max 1;
+			_holder addMagazineCargoGlobal [_loot, _amount];
+		} else {
+			diag_log format ["Could not find magazines for weapon %1", _weapon];
+		};
+	};
+
+	//clothing
+    case (2): {
+		_loot= selectRandom itemsLoot;
+		_holder addItemCargoGlobal [_loot, 1];
+
+		_loot= selectRandom clothesLoot;
+		_holder addItemCargoGlobal [_loot, 1];
+    };
+
+	//vests
+	case (3): {
+		_loot= selectRandom vestsLoot;
+		_holder addItemCargoGlobal [_loot, 1];
+    };
+
+	//backpacks
+	case (4): {
+		_loot= selectRandom backpacksLoot;
+		_holder addBackpackCargoGlobal [_loot, 1];
+    };
+
+	//medical
+	case (5): {
+		_amount = (floor (random 4.99)) max 1;
+		_loot= selectRandom medicalLoot;
+		_holder addItemCargoGlobal [_loot, _amount];
+    };
+
+	//grenades
+	case (6): {
+		_amount = (floor (random 2.99)) max 1;
+		_loot= selectRandom grenadeLoot;
+		_holder addItemCargoGlobal [_loot, _amount];
+    };
+
+	//accessories
+	case (7): {
+		_loot= selectRandom weaponAccessoryLoot;
+		_holder addItemCargoGlobal [_loot, 1];
+    };
+
+	//sights
+	case (8): {
+		_loot= selectRandom sightsLoot;
+		_holder addItemCargoGlobal [_loot, 1];
+    };
+
+	//scopes
+	case (9): {
+		_loot= selectRandom scopesLoot;
+		_holder addItemCargoGlobal [_loot, 1];
+	};
+};
 
 //Mark on map if DEBUG =============================================================================================================================
 if (DEBUG_MODE) then {
@@ -58,98 +143,4 @@ if (DEBUG_MODE) then {
 		_txt=format ["%1",_type];
 		_debug setMarkerText _txt;
 	};
-};
-
-
-//Add items to weapon holder =======================================================================================================================
-
-// Spawn Weapon
-if (_type == 0) then {
-	_loot= selectRandom weaponsLoot;
-
-	_magazines = getArray (configFile / "CfgWeapons" / _loot / "magazines");
-
-	if ((count _magazines) > 0) then {
-		_magazineClass = selectRandom _magazines;
-
-		_holder addWeaponCargoGlobal [_loot, 1];
-		_holder addMagazineCargoGlobal [_magazineClass, ((floor random 4.50) max 2)];
-	} else {
-		diag_log format ["Could not find magazines for weapon %1", _loot];
-	};
-};
-
-
-// Spawn Magazines
-if (_type == 1) then {
-	_weapon= selectRandom allWeaponsLoot;
-	_magazines = getArray (configFile / "CfgWeapons" / _weapon / "magazines");
-
-	if ((count _magazines) > 0) then {
-		_loot = selectRandom _magazines;
-
-		_amount = (floor (random 4.99)) max 1;
-		_holder addMagazineCargoGlobal [_loot, _amount];
-	} else {
-		diag_log format ["Could not find magazines for weapon %1", _weapon];
-	};
-
-};
-
-
-// Spawn Clothing
-if (_type == 2) then {
-	_loot= selectRandom itemsLoot;
-	_holder addItemCargoGlobal [_loot, 1];
-
-	_loot= selectRandom clothesLoot;
-	_holder addItemCargoGlobal [_loot, 1];
-};
-
-
-// Spawn Vests
-if (_type == 3) then {
-	_loot= selectRandom vestsLoot;
-	_holder addItemCargoGlobal [_loot, 1];
-};
-
-
-// Spawn Backpacks
-if (_type == 4) then {
-	_loot= selectRandom backpacksLoot;
-	_holder addBackpackCargoGlobal [_loot, 1];
-};
-
-
-// Spawn Medical
-if (_type == 5) then {
-	_amount = (floor (random 4.99)) max 1;
-	_loot= selectRandom medicalLoot;
-	_holder addItemCargoGlobal [_loot, _amount];
-};
-
-
-//Spawn Grenades
-if (_type == 6) then {
-	_amount = (floor (random 2.99)) max 1;
-	_loot= selectRandom grenadeLoot;
-	_holder addItemCargoGlobal [_loot, _amount];
-};
-
-//Spawn Weapon Accessories
-if (_type == 7) then {
-	_loot= selectRandom weaponAccessoryLoot;
-	_holder addItemCargoGlobal [_loot, 1];
-};
-
-//Spawn Sights
-if (_type == 8) then {
-	_loot= selectRandom sightsLoot;
-	_holder addItemCargoGlobal [_loot, 1];
-};
-
-//Spawn Scopes
-if (_type == 9) then {
-	_loot= selectRandom scopesLoot;
-	_holder addItemCargoGlobal [_loot, 1];
 };
